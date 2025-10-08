@@ -4,32 +4,34 @@
  */
 package Model;
 
-
 /**
  *
  * @author superbi
  */
+
 public class User {
+    protected int id;
     protected String nome;
-    protected char sexo;
     protected int idade;
+    private String cpf;
     
     public User() {
+        this.id = 0;
         this.nome = "";
-        this.sexo = ' ';
         this.idade = 0;
+        this.cpf = "000.000.000-00";   
     }
     
-    public User(String nome, char sexo, int idade) {
+    public User(int id, String nome, int idade, String cpf) {
+        this.id = id;
         this.nome = nome;
-        this.sexo = sexo;
         this.idade = idade;
+        this.cpf = cpf;
     } 
 
     public String toString() {
-        String txt = "Nome: " + this.nome +"\n"
-        +"Sexo: "+ this.sexo + "\n"
-        +"Idade: "+ this.idade+"\n";
+        String txt = "ID: "+ this.id + "Nome: " + this.nome +"\n"
+        + "\n" +"Idade: "+ this.idade+"\n" + "CPF: " + this.cpf + "\n";
         return txt;
     }   
     
@@ -40,10 +42,16 @@ public class User {
             return false;
         else if(this.idade != outro.getIdade())
             return false;
-        else if(this.sexo != outro.getSexo())
-            return false;
-        
         return true;
+    }
+    
+    
+        public int getID() {
+        return id;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
     }
     
     public String getNome() {
@@ -55,21 +63,9 @@ public class User {
         this.nome = nome;
     }
 
-    
-    public char getSexo() {
-        return sexo;
-    }
-
-    
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
-    
     public int getIdade() {
         return idade;
     }
-
     
     public void setIdade(int idade) {
         this.idade = idade;

@@ -4,14 +4,18 @@
  */
 package Model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author superbi
  */
 public class ValidarLogin {
-   
-    private static final String USUARIO_CORRETO = "admin";
-    private static final String SENHA_CORRETA = "123";
+
+    
+    private static final String CAMINHO_CSV = "usuarios.csv";
 
     public boolean validar(String usuario, String senha) {
         // Verifica se os campos não são nulos para evitar NullPointerException
@@ -19,8 +23,31 @@ public class ValidarLogin {
             return false;
         }
 
-        // Compara o usuário e a senha fornecidos com os valores corretos.
-        // É crucial usar o método .equals() para comparar o conteúdo de Strings em Java.
-        return usuario.equals(USUARIO_CORRETO) && senha.equals(SENHA_CORRETA);
+        // A estrutura 'try-with-resources' garante que o BufferedReader será fechado automaticamente.
+        try (BufferedReader br = new BufferedReader(new FileReader(CAMINHO_CSV))) {
+            String linha;
+            br.readLine();
+
+            while ((linha = br.readLine()) != null) {
+                String[] valores = linha.split(",");
+
+                if (valores.length >= 2) {
+                    String loginDoCsv = valores[0];
+                    String senhaDoCsv = valores[1];
+
+                    if (loginDoCsv.equals(usuario) && senhaDoCsv.equals(senha)) {
+                        return true; 
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // Em caso de erro ao ler o arquivo (ex: arquivo não encontrado),
+            // imprime o erro e falha a validação.
+            System.err.println("Erro ao ler o arquivo CSV: " + e.getMessage());
+            return false;
+        }
+
+        // Se o loop terminar e nenhuma correspondência for encontrada, o login é inválido.
+        return false;
     }
 }

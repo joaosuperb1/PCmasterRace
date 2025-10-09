@@ -8,6 +8,6 @@ package Model;
  *
  * @author superbi
  */
-public class Gerente {
+public class Gerente extends User {
     
 }

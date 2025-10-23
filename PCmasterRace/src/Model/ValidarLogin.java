@@ -20,8 +20,14 @@ public class ValidarLogin {
     
     private static final String CAMINHO_CSV = "usuarios.csv";
     
+     public ValidarLogin(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+
+    
     //Garante que os dados inseridos são válidos.
-    public void ValueValidator() throws ValidationException {
+    public void ValidarLogin() throws ValidationException {
         // Validação do login
         if (login == null) {
             throw new ValidationException("Login não pode ser nulo.");

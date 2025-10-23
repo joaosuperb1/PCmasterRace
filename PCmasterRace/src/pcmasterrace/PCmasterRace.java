@@ -4,6 +4,8 @@
  */
 package pcmasterrace;
 
+import view.FrLogin;
+
 /**
  *
  * @author superbi
@@ -14,7 +16,8 @@ public class PCmasterRace {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrLogin login = new FrLogin();
+        login.setVisible(true);
     }
     
 }

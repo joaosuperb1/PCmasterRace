@@ -122,9 +122,14 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_edtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-       // LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
+        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
+        // LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    public boolean ValueValidation(String login, String senha){
+        
+        return true;
+    }
     /**
      * @param args the command line arguments
      */

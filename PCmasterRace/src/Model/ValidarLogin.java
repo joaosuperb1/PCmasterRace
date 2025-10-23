@@ -27,10 +27,11 @@ public class ValidarLogin {
 
     
     //Garante que os dados inseridos são válidos.
-    public void ValidarLogin() throws ValidationException {
+    public boolean ValidarLogin() throws ValidationException {
         // Validação do login
         if (login == null) {
             throw new ValidationException("Login não pode ser nulo.");
+            
         }
         if (login.length() > 24) {
             throw new ValidationException("Login deve conter no máximo 24 caracteres.");
@@ -46,39 +47,28 @@ public class ValidarLogin {
         if (senha.length() > 32) {
             throw new ValidationException("Senha deve conter no máximo 32 caracteres.");
         }
+        return true;
     }
     
     //Verifica se existe um usuário correspondente
-    
-    public boolean validar(String usuario, String senha) {
-        
-       
-
-        // A estrutura 'try-with-resources' garante que o BufferedReader será fechado automaticamente.
-        try (BufferedReader br = new BufferedReader(new FileReader(CAMINHO_CSV))) {
-            String linha;
-            br.readLine();
-
-            while ((linha = br.readLine()) != null) {
-                String[] valores = linha.split(",");
-
-                if (valores.length >= 2) {
-                    String loginDoCsv = valores[0];
-                    String senhaDoCsv = valores[1];
-
-                    if (loginDoCsv.equals(usuario) && senhaDoCsv.equals(senha)) {
-                        return true; 
-                    }
-                }
-            }
-        } catch (IOException e) {
-            
-            // imprime o erro e falha a validação.
-            System.err.println("Erro ao ler o arquivo CSV: " + e.getMessage());
-            return false;
+    public int validateUser(String login, String senha){
+        Cliente clienteCustom = (Cliente) Cliente.criarUsuarioTeste("cliente", "12345678");
+        if(clienteCustom.getLogin().equals(login) && clienteCustom.getSenha().equals(senha)){
+            return clienteCustom.getNivelAcesso();
         }
-
-        // Se o loop terminar e nenhuma correspondência for encontrada, o login é inválido.
-        return false;
+        Tecnico tecnicoCustom = (Tecnico) Tecnico.criarUsuarioTeste("tecnico", "12345678");
+        if(tecnicoCustom.getLogin().equals(login) && tecnicoCustom.getSenha().equals(senha)){
+            return tecnicoCustom.getNivelAcesso();
+        }
+        Gerente gerenteCustom = (Gerente) Gerente.criarUsuarioTeste("admin", "12345678");
+        if(gerenteCustom.getLogin().equals(login) && gerenteCustom.getSenha().equals(senha)){
+            return gerenteCustom.getNivelAcesso();
+        }
+        else{
+            return 0;
+        }
+    }
+    public int getUserID(String login, User custom){
+        return custom.getID();
     }
 }

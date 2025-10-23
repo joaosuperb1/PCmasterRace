@@ -12,9 +12,12 @@ public class Gerente extends User {
     
     private int accesslevel = 1;
     @Override
+    
     public int getNivelAcesso() {
         return this.accesslevel;
     }
+    
+    
 
     
 }

@@ -5,10 +5,11 @@
 package controller;
 
 import Model.Cliente;
-import Model.Funcionario;
 import Model.Gerente;
 import Model.Tecnico;
 import Model.User;
+import Model.ValidarLogin;
+import Model.exceptions.ValidationException;
 
 /**
  *
@@ -16,27 +17,37 @@ import Model.User;
  */
 public class LoginController {
     
-        
-    public User validarLogin( String login, String senha) {
-        
-        
-        Cliente clienteCustom = (Cliente) Cliente.criarUsuarioTeste("cliente", "12345678");
-        if(clienteCustom.getLogin().equals(login) && clienteCustom.getSenha().equals(senha)){
-            return clienteCustom;
-        }
-        Tecnico tecnicoCustom = (Tecnico) Tecnico.criarUsuarioTeste("tecnico", "12345678");
-        if(tecnicoCustom.getLogin().equals(login) && tecnicoCustom.getSenha().equals(senha)){
-            return tecnicoCustom;
-        }
-        Gerente gerenteCustom = (Gerente) Gerente.criarUsuarioTeste("admin", "12345678");
-        if(gerenteCustom.getLogin().equals(login) && gerenteCustom.getSenha().equals(senha)){
-            return gerenteCustom;
-        }
-      
-        
-            
-        return null;
+    private String login;
+    private String senha;
+    
+    public LoginController(){
+        this.login = null;
+        this.senha = null;
     }
+    
+    public LoginController(String login, String senha){
+        this.login = login;
+        this.senha = senha;
+    }
+    
+    public boolean valueValidator(){
+        ValidarLogin validator = new ValidarLogin(this.login, this.senha);
+        try {
+            validator.ValidarLogin();
+            
+            
+        } catch (ValidationException e) {
+            System.out.println("Erro de validação: " + e.getMessage());
+        }
+        return true;
+    }
+    
+    public int validaLogin( String login, String senha) {
+        ValidarLogin validate = new ValidarLogin(login, senha);
+        return validate.validateUser(login, senha);
+    }
+    
+    
 
     
     

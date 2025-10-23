@@ -85,6 +85,13 @@ public abstract class User {
         return hash;
     }
     
+    public int getUser(String login, User custom){
+        if(login.equals(custom.getLogin())){
+            return custom.getId();
+        }
+        return -1;
+    }
+    
     
         public int getID() {
         return id;

@@ -17,19 +17,28 @@ import Model.User;
 public class LoginController {
     
         
-    public boolean validarLogin(User usuario, String login, String senha) {
+    public User validarLogin( String login, String senha) {
         
-        Cliente usuarioCustom1 = (Cliente) Cliente.criarUsuarioTeste("admin", "12345678");
-        Funcionario usuarioCustom2 = (Funcionario) Funcionario.criarUsuarioTeste("admin", "12345678");
-        Tecnico usuarioCustom3 = (Tecnico) Tecnico.criarUsuarioTeste("tecnico", "12345678");
-        Gerente usuarioCustom4 = (Gerente) Gerente.criarUsuarioTeste("cliente", "12345678");
-      
-        if (usuario == null || login == null || senha == null ) {
-            return false;
+        
+        Cliente clienteCustom = (Cliente) Cliente.criarUsuarioTeste("cliente", "12345678");
+        if(clienteCustom.getLogin().equals(login) && clienteCustom.getSenha().equals(senha)){
+            return clienteCustom;
         }
-            return usuario.getLogin().equals(login) && usuario.getSenha().equals(senha);
+        Tecnico tecnicoCustom = (Tecnico) Tecnico.criarUsuarioTeste("tecnico", "12345678");
+        if(tecnicoCustom.getLogin().equals(login) && tecnicoCustom.getSenha().equals(senha)){
+            return tecnicoCustom;
+        }
+        Gerente gerenteCustom = (Gerente) Gerente.criarUsuarioTeste("admin", "12345678");
+        if(gerenteCustom.getLogin().equals(login) && gerenteCustom.getSenha().equals(senha)){
+            return gerenteCustom;
+        }
+      
         
+            
+        return null;
     }
+
+    
     
  
 }

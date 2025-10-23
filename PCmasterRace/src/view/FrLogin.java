@@ -5,6 +5,7 @@
 package view;
 import Model.ValidarLogin;
 import Model.exceptions.ValidationException;
+import controller.LoginController;
 /**
  *
  * @author gabri
@@ -133,19 +134,22 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_edtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        ValidarLogin validator = new ValidarLogin( edtUser.getText(), edtPassword.getText());
-        
-        try {
-            validator.ValidarLogin();
-            MessageBar.setText("Bem vindo!");
-            System.out.println("Login e senha válidos!");
-        } catch (ValidationException e) {
-            MessageBar.setText(e.getMessage());
-            System.out.println("Erro de validação: " + e.getMessage());
-        }
 
-        // LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
+        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
+        //ValidarLogin validator = new ValidarLogin( edtUser.getText(), edtPassword.getText());
+        
+        //try {
+            //validator.ValidarLogin();
+            
+            //MessageBar.setText("Bem vindo!");
+            //System.out.println("Login e senha válidos!");
+        //} catch (ValidationException e) {
+            //MessageBar.setText(e.getMessage());
+           // System.out.println("Erro de validação: " + e.getMessage());
+        }
+    
+        
+            
     }//GEN-LAST:event_btnLoginActionPerformed
 
     

@@ -4,6 +4,7 @@
  */
 package pcmasterrace;
 
+import Model.Cliente;
 import view.FrLogin;
 
 /**
@@ -16,6 +17,8 @@ public class PCmasterRace {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
         FrLogin login = new FrLogin();
         login.setVisible(true);
     }

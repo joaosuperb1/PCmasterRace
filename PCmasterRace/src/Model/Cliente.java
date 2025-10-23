@@ -9,5 +9,12 @@ package Model;
  * @author superbi
  */
 public class Cliente extends User {
+
+    @Override
+    public int getNivelAcesso() {
+        return 1; // Nível mais básico
+    }
+
+    
     
 }

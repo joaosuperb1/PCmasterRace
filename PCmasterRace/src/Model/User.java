@@ -4,16 +4,18 @@
  */
 package Model;
 
+import java.awt.List;
+import java.util.Objects;
+
 /**
  *
  * @author superbi
  */
 
 //@Entity
-public class User {
+public abstract class User {
     
     /*
-    
     Acabei de ver na aula do seu zé 
     
     @Id // chave primária 
@@ -25,6 +27,7 @@ public class User {
     private String cpf;
     private String login;
     private String senha;
+
     
     public User() {
         this.id = 0;
@@ -43,10 +46,20 @@ public class User {
         this.login = login;
         this.senha = senha;
     } 
+    
+    // Métodos abstratos que devem ser implementados pelas subclasses
+    public abstract int getNivelAcesso();
 
+    
     //Criar usuario Teste
     public static User criarUsuarioTeste(String login, String senha) {
-        return new User(1, "Usuário Teste", 25, "111.111.111-11", login, senha);
+        return new User(1, "Usuário Teste", 25, "111.111.111-11", login, senha) {
+            @Override
+            public int getNivelAcesso() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+        };
     }
     
     @Override
@@ -57,6 +70,19 @@ public class User {
         else if(this.idade != outro.getIdade())
             return false;
         return true;
+    }
+    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.nome);
+        hash = 71 * hash + this.idade;
+        hash = 71 * hash + Objects.hashCode(this.cpf);
+        hash = 71 * hash + Objects.hashCode(this.login);
+        hash = 71 * hash + Objects.hashCode(this.senha);
+        return hash;
     }
     
     

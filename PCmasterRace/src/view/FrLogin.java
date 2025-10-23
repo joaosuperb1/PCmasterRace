@@ -5,6 +5,7 @@
 package view;
 import Model.ValidarLogin;
 import Model.exceptions.ValidationException;
+import controller.LoginController;
 /**
  *
  * @author gabri
@@ -133,55 +134,25 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_edtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        ValidarLogin validator = new ValidarLogin( edtUser.getText(), edtPassword.getText());
-        
-        try {
-            validator.ValidarLogin();
-            System.out.println("Login e senha válidos!");
-        } catch (ValidationException e) {
-            MessageBar.setText(e.getMessage());
-            System.out.println("Erro de validação: " + e.getMessage());
-        }
 
-        // LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
+        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
+        LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
+        
+        if(controller.valueValidator()){
+            
+        }
+        
+        
+    
+        
+            
     }//GEN-LAST:event_btnLoginActionPerformed
 
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrLogin().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea MessageBar;

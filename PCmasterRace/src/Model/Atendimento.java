@@ -12,7 +12,7 @@ public class Atendimento {
     
     protected int id;
     protected String data_atendimento;
-    protected Funcionario funcionario;
+    protected Tecnico tecnico;
     private String status;
     private Cliente cliente;
     private String preco;
@@ -34,12 +34,12 @@ public class Atendimento {
         this.data_atendimento = data_atendimento;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Tecnico getTecnico() {
+        return tecnico;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setTecnico(Tecnico tecnico) {
+        this.tecnico = tecnico;
     }
 
     public String getStatus() {
@@ -76,7 +76,7 @@ public class Atendimento {
 
     @Override
     public String toString() {
-        return "Atendimento{" + "id=" + id + ", data_atendimento=" + data_atendimento + ", funcionario=" + funcionario + ", status=" + status + ", cliente=" + cliente + ", preco=" + preco + ", descricao=" + descricao + '}';
+        return "Atendimento{" + "id=" + id + ", data_atendimento=" + data_atendimento + ", tecnico=" + tecnico + ", status=" + status + ", cliente=" + cliente + ", preco=" + preco + ", descricao=" + descricao + '}';
     }
     
 

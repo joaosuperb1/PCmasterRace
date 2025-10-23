@@ -28,7 +28,7 @@ public class FrEstoque extends javax.swing.JFrame {
 
         lblTitle = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
-        btnEncomenda = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnCadastro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,11 +44,11 @@ public class FrEstoque extends javax.swing.JFrame {
             }
         });
 
-        btnEncomenda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEncomenda.setText("Encomendas");
-        btnEncomenda.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setText("Atualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncomendaActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -71,7 +71,7 @@ public class FrEstoque extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEncomenda, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -84,7 +84,7 @@ public class FrEstoque extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEncomenda, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(87, Short.MAX_VALUE))
@@ -94,16 +94,15 @@ public class FrEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
-        // Abre o formulário de cadastro de atendimento.
-        // Visível somente para nível técnico e gerente.
+        // Abre o painel de listagem de itens no estoque
     }//GEN-LAST:event_btnDetailActionPerformed
 
-    private void btnEncomendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncomendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEncomendaActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // Abre o painel de encomendas, para se adicionar itens no estoque
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        // Abre o painel de cadastro, para adicionar modelos de peças e dispositivos no estoque
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     /**
@@ -144,7 +143,7 @@ public class FrEstoque extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnDetail;
-    private javax.swing.JButton btnEncomenda;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

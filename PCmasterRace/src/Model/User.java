@@ -25,10 +25,6 @@ public class User {
     private String cpf;
     private String login;
     private String senha;
-
-    public User(String login, String senha) {
-        
-    }
     
     public User() {
         this.id = 0;

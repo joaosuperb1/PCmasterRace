@@ -138,6 +138,7 @@ public class FrLogin extends javax.swing.JFrame {
         
         try {
             validator.ValidarLogin();
+            MessageBar.setText("Bem vindo!");
             System.out.println("Login e senha válidos!");
         } catch (ValidationException e) {
             MessageBar.setText(e.getMessage());

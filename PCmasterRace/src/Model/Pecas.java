@@ -19,6 +19,11 @@ public class Pecas {
     
     // Construtor padrão
     public Pecas() {
+        this.ID = 0;
+        this.brand = "";
+        this.condicao = "";
+        this.custo = 0.0;
+        this.preco = 0.0;
     }
     
     // Construtor com parâmetros

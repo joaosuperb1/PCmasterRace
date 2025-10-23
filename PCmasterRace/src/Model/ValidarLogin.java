@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Model.exceptions.ValidationException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,14 +15,38 @@ import java.io.IOException;
  */
 public class ValidarLogin {
 
+    private String login;
+    private String senha;
     
     private static final String CAMINHO_CSV = "usuarios.csv";
-
-    public boolean validar(String usuario, String senha) {
-        // Verifica se os campos não são nulos para evitar NullPointerException
-        if (usuario == null || senha == null) {
-            return false;
+    
+    //Garante que os dados inseridos são válidos.
+    public void ValueValidator() throws ValidationException {
+        // Validação do login
+        if (login == null) {
+            throw new ValidationException("Login não pode ser nulo.");
         }
+        if (login.length() > 24) {
+            throw new ValidationException("Login deve conter no máximo 24 caracteres.");
+        }
+        if (!login.matches("[a-zA-Z0-9]+")) {
+            throw new ValidationException("Login deve conter apenas letras e números.");
+        }
+
+        // Validação da senha
+        if (senha == null) {
+            throw new ValidationException("Senha não pode ser nula.");
+        }
+        if (senha.length() > 32) {
+            throw new ValidationException("Senha deve conter no máximo 32 caracteres.");
+        }
+    }
+    
+    //Verifica se existe um usuário correspondente
+    
+    public boolean validar(String usuario, String senha) {
+        
+       
 
         // A estrutura 'try-with-resources' garante que o BufferedReader será fechado automaticamente.
         try (BufferedReader br = new BufferedReader(new FileReader(CAMINHO_CSV))) {

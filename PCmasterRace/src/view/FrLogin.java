@@ -122,7 +122,7 @@ public class FrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_edtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
+       // LoginController.loginValidate(edtUser.getText(), edtPassword.getText());
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

@@ -8,6 +8,6 @@ package Model;
  *
  * @author superbi
  */
-public class Cliente {
+public class Cliente extends User {
     
 }

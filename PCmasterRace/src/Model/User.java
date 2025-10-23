@@ -9,7 +9,16 @@ package Model;
  * @author superbi
  */
 
+//@Entity
 public class User {
+    
+    /*
+    
+    Acabei de ver na aula do seu zé 
+    
+    @Id // chave primária 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gerar ID
+    */
     protected int id;
     protected String nome;
     protected int idade;

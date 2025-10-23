@@ -41,7 +41,7 @@ public class ValidarLogin {
                 }
             }
         } catch (IOException e) {
-            // Em caso de erro ao ler o arquivo (ex: arquivo não encontrado),
+            
             // imprime o erro e falha a validação.
             System.err.println("Erro ao ler o arquivo CSV: " + e.getMessage());
             return false;

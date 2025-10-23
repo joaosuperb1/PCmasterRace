@@ -10,7 +10,9 @@ package controller;
  */
 public class LoginController {
     public boolean loginValidate(String login, String senha){
-        if()
+      //  if()
+        return false;
+      //  if()
         
     }
 }

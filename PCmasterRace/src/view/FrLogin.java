@@ -136,19 +136,23 @@ public class FrLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
+        //LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
         
-        if(controller.valueValidator()){
+        //if(controller.valueValidator()){
             
-        }
-        
-        
+        //}
+        FrGerente painelGerente = new FrGerente(this, true);
+        painelGerente.setLocationRelativeTo(this);
+        painelGerente.setVisible(true);
+        this.changePanelVisibility(false);
     
         
             
     }//GEN-LAST:event_btnLoginActionPerformed
-
     
+    public void changePanelVisibility(boolean flag){
+        this.setVisible(flag);
+    }
     /**
      * @param args the command line arguments
      */

@@ -5,7 +5,7 @@
 package pcmasterrace;
 
 import Model.Cliente;
-import view.FrLogin;
+import view.FrHome;
 
 /**
  *
@@ -18,8 +18,8 @@ public class PCmasterRace {
      */
     public static void main(String[] args) {
         
-        FrLogin login = new FrLogin();
-        login.setVisible(true);
+        FrHome home = new FrHome();
+        home.setVisible(true);
     }
     
 }

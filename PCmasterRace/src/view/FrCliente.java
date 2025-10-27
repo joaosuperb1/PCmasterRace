@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
 
@@ -8,12 +8,13 @@ package view;
  *
  * @author gabri
  */
-public class FrCliente extends javax.swing.JFrame {
+public class FrCliente extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrCliente
+     * Creates new form FrClienteD
      */
-    public FrCliente() {
+    public FrCliente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -31,7 +32,7 @@ public class FrCliente extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setText("Painel - Clientes");
@@ -138,11 +139,19 @@ public class FrCliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrCliente().setVisible(true);
+                FrCliente dialog = new FrCliente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

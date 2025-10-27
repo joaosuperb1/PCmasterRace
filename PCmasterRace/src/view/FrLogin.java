@@ -1,22 +1,20 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
-import Model.ValidarLogin;
-import Model.exceptions.ValidationException;
-import controller.LoginController;
+
 /**
  *
  * @author gabri
  */
-//Página de Login valida o usuário e acessa o painel referente ao nível do mesmo.
-public class FrLogin extends javax.swing.JFrame {
+public class FrLogin extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrLogin
+     * Creates new form FrLoginD
      */
-    public FrLogin() {
+    public FrLogin(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -38,7 +36,7 @@ public class FrLogin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         MessageBar = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setBackground(new java.awt.Color(102, 102, 102));
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -136,19 +134,23 @@ public class FrLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
+        //LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
+
+        //if(controller.valueValidator()){
+
+            //}
+        FrHome painelHome = new FrHome();    
+        FrGerente painelGerente = new FrGerente(painelHome, true);
+        this.changePanelVisibility(false);
+        painelGerente.setLocationRelativeTo(this);
+        painelGerente.setVisible(true);
         
-        if(controller.valueValidator()){
-            
-        }
-        
-        
-    
-        
-            
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    
+    public void changePanelVisibility(boolean flag){
+        this.setVisible(flag);
+    }
     /**
      * @param args the command line arguments
      */

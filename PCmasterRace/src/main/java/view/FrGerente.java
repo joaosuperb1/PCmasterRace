@@ -138,6 +138,9 @@ public class FrGerente extends javax.swing.JDialog {
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
         // Abre o painel de estoque com nível de acesso gerente?
+        FrEstoque estoque = new FrEstoque();
+        estoque.setLocationRelativeTo(null);
+        estoque.setVisible(true);
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

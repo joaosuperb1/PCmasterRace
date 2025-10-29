@@ -4,17 +4,31 @@
  */
 package view;
 
+import Model.Dispositivos;
+import Model.Pecas;
+import controller.EstoqueController;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author gabri
  */
 public class FrEstoque extends javax.swing.JFrame {
+    
+    private EstoqueController gerenciadorEstoque;
+    private TMcadEstoque tableModel;
 
     /**
      * Creates new form FrEstoque
      */
     public FrEstoque() {
         initComponents();
+        // 1. Cria UMA instância do Gerenciador
+        this.gerenciadorEstoque = new EstoqueController();
+        
+        // 2. Carrega os dados na tabela PELA PRIMEIRA VEZ
+        atualizarTabelaCombinada();
     }
 
     /**
@@ -30,6 +44,8 @@ public class FrEstoque extends javax.swing.JFrame {
         btnDetail = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnCadastro = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gridEstoque = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,34 +76,54 @@ public class FrEstoque extends javax.swing.JFrame {
             }
         });
 
+        gridEstoque.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(gridEstoque);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(lblTitle)
+                        .addGap(0, 173, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,6 +141,27 @@ public class FrEstoque extends javax.swing.JFrame {
         // Abre o painel de cadastro, para adicionar modelos de peças e dispositivos no estoque
     }//GEN-LAST:event_btnCadastroActionPerformed
 
+    
+public void atualizarTabelaCombinada() {
+        // 1. Criar uma lista genérica para juntar tudo
+        List<Object> listaCombinada = new ArrayList<>();
+
+        // 2. Buscar e adicionar os Dispositivos
+        List<Dispositivos> listaDispositivos = this.gerenciadorEstoque.listarDispositivos();
+        listaCombinada.addAll(listaDispositivos);
+
+        // 3. Buscar e adicionar as Peças
+        List<Pecas> listaPecas = this.gerenciadorEstoque.listarPecas();
+        listaCombinada.addAll(listaPecas);
+
+        // 4. Criar o TableModel com a lista combinada
+        // (O TMcadEstoque que fizemos já sabe lidar com os dois tipos)
+        TMcadEstoque tmcadEstoque = new TMcadEstoque(listaCombinada);
+
+        // 5. Ligar o modelo na JTable
+        gridEstoque.setModel(tmcadEstoque);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -144,6 +201,8 @@ public class FrEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JTable gridEstoque;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

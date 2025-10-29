@@ -121,7 +121,11 @@ public class FrGerente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentosActionPerformed
-        // Abre o painel de atendimentos com nível de acesso gerente.
+        
+        FrAtendimentos atendimentos = new FrAtendimentos(null, true);
+        atendimentos.setLocationRelativeTo(null);
+        atendimentos.setVisible(true);
+    
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed

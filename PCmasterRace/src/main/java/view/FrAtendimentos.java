@@ -4,18 +4,31 @@
  */
 package view;
 
+import Model.Atendimento;
+import controller.AtendimentoController;
+import java.util.List;
+
 /**
  *
  * @author gabri
  */
 public class FrAtendimentos extends javax.swing.JDialog {
-
+    
+    private AtendimentoController gerenciadorAtendimento;
+    private TMcadAtendimento tableModel;
     /**
      * Creates new form FrAtendimentosD
      */
     public FrAtendimentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        // 1. Cria UMA instância do Gerenciador
+        this.gerenciadorAtendimento = new AtendimentoController();
+        
+        // 2. Carrega os dados na tabela PELA PRIMEIRA VEZ
+        atualizarTabela();
+
+
     }
 
     /**
@@ -30,6 +43,8 @@ public class FrAtendimentos extends javax.swing.JDialog {
         lblTitle = new javax.swing.JLabel();
         btnNovo = new javax.swing.JButton();
         btnLista = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gridCadAtendimento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,19 +67,34 @@ public class FrAtendimentos extends javax.swing.JDialog {
             }
         });
 
+        gridCadAtendimento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(gridCadAtendimento);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,10 +103,13 @@ public class FrAtendimentos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,6 +125,19 @@ public class FrAtendimentos extends javax.swing.JDialog {
         // Nível de acesso cliente só mostra atendimentos do usuário.
     }//GEN-LAST:event_btnListaActionPerformed
 
+    
+    
+public void atualizarTabela() {
+        // 1. Busca a lista de dados no gerenciador
+        List<Atendimento> lista = this.gerenciadorAtendimento.listarTodos();
+        
+        // 2. Cria o objeto AbstractTableModel
+        TMcadAtendimento tmcadAtendimento = new TMcadAtendimento(lista);
+        
+        // 3. Ligar ele no modelo da sua JTable
+        // (use o nome exato da sua JTable, ex: gridCadAtendimento)
+        gridCadAtendimento.setModel(tmcadAtendimento);
+    }
     /**
      * @param args the command line arguments
      */
@@ -137,6 +183,8 @@ public class FrAtendimentos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLista;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JTable gridCadAtendimento;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

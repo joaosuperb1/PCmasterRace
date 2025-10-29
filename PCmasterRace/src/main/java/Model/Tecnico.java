@@ -9,9 +9,8 @@ package Model;
  * @author superbi
  */
 public class Tecnico extends User{
-    private int accessLevel;
     @Override
     public int getNivelAcesso() {
-        return this.accessLevel;
+        return 2;
     }
 }

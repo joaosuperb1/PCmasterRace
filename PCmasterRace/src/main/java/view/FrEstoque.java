@@ -161,6 +161,28 @@ public void atualizarTabelaCombinada() {
         // 5. Ligar o modelo na JTable
         gridEstoque.setModel(tmcadEstoque);
     }
+
+    /**
+     * Atualiza APENAS a tabela de dispositivos.
+     */
+    public void atualizarTabelaDispositivos() {
+        List<Dispositivos> lista = this.gerenciadorEstoque.listarDispositivos();
+        TMcadEstoque tmcadEstoque = new TMcadEstoque(lista);
+        // Supondo que o nome da sua JTable de dispositivos seja gridDispositivos
+        gridEstoque.setModel(tmcadEstoque); 
+    }
+
+    /**
+     * Atualiza APENAS a tabela de peças.
+     */
+    public void atualizarTabelaPecas() {
+        List<Pecas> lista = this.gerenciadorEstoque.listarPecas();
+        TMcadEstoque tmcadEstoque = new TMcadEstoque(lista);
+        // Supondo que o nome da sua JTable de peças seja gridPecas
+        gridEstoque.setModel(tmcadEstoque);
+    }
+
+
     
     /**
      * @param args the command line arguments

@@ -32,10 +32,13 @@ controller/EstoqueController.class
 controller/LoginController.class
 Model/Gerente.class
 view/FrHome$1.class
+controller/UserController.class
 view/FrGerente$4.class
+view/TMcadUser.class
 view/FrGerente$1.class
 view/FrCliente$2.class
 view/FrTécnico$3.class
+view/FrVisualizarFuncionario.class
 view/FrAtendimentos$1.class
 view/FrLogin$3.class
 view/FrGerente$2.class

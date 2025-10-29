@@ -12,7 +12,7 @@ public class Cliente extends User {
 
     @Override
     public int getNivelAcesso() {
-        return 1; // Nível mais básico
+        return 3; // Nível mais básico
     }
 
     

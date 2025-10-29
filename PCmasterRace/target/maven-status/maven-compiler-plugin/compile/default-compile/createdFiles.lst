@@ -7,6 +7,7 @@ view/FrHome$2.class
 view/FrCliente$4.class
 view/FrAtendimentos.class
 Model/Pecas.class
+view/TMcadEstoque.class
 view/TMcadAtendimento.class
 Model/User.class
 view/FrTécnico.class
@@ -27,6 +28,7 @@ Model/Atendimento.class
 view/FrEstoque$4.class
 Model/Cliente.class
 view/FrLogin$2.class
+controller/EstoqueController.class
 controller/LoginController.class
 Model/Gerente.class
 view/FrHome$1.class

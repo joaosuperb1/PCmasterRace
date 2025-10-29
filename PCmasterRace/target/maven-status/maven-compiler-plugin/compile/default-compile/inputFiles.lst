@@ -10,6 +10,7 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/exceptions/ValidationException.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/com/mycompany/pcmasterrace/PCmasterRace.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/AtendimentoController.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/EstoqueController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/LoginController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrAtendimentos.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrCliente.java
@@ -19,3 +20,4 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrLogin.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrTécnico.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/TMcadAtendimento.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/TMcadEstoque.java

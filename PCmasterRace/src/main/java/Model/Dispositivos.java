@@ -16,7 +16,7 @@ public class Dispositivos {
     private double custo;
     private double preco;
 
-    public Dispositivos(int id, String brand, String model, String condicao, double custo, double preco) {
+    public Dispositivos() {
         this.id = 0;
         this.brand = "";
         this.model = "";
@@ -24,12 +24,21 @@ public class Dispositivos {
         this.custo = 0.0;
         this.preco = 0.0;
     }
-
-    public int getId() {
+    
+    public Dispositivos(int id, String brand, String model, String condicao, double custo, double preco) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.condicao = condicao;
+        this.custo = custo;
+        this.preco = preco;
+    }
+    
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 

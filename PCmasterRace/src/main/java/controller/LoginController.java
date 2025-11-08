@@ -4,6 +4,7 @@
  */
 package controller;
 
+import Model.User;
 import Model.ValidarLogin;
 import Model.exceptions.ValidationException;
 
@@ -11,8 +12,11 @@ import Model.exceptions.ValidationException;
  *
  * @author gabri
  */
+
+
+
 public class LoginController {
-    
+    private ValidarLogin validator = new ValidarLogin();
     private String login;
     private String senha;
     
@@ -26,22 +30,46 @@ public class LoginController {
         this.senha = senha;
     }
     
-    public boolean valueValidator(){
-        ValidarLogin validator = new ValidarLogin(this.login, this.senha);
+    public boolean valueValidator(String login, String senha){
+        
         try {
             validator.ValidarLogin();
-            
+            return true;
             
         } catch (ValidationException e) {
             System.out.println("Erro de validação: " + e.getMessage());
+            return false;
         }
-        return true;
+        
     }
     
-    public int validaLogin( String login, String senha) {
-        ValidarLogin validate = new ValidarLogin(login, senha);
-        return validate.validateUser(login, senha);
+    public User validarLogin( String login, String senha) {
+        if(this.valueValidator(login, senha)){
+         return null;   
+        } else {
+            return null;
+        }
     }
+    
+    
+    public void setLogin(String login){
+        this.login = login;
+    }
+    
+    public String getLogin(){
+        return this.login;
+    }
+    
+    
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+    
+    public String getSenha(){
+        return this.senha;
+    }
+    
+    
     
     
 

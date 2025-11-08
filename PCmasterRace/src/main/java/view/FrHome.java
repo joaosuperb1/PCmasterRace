@@ -4,6 +4,7 @@
  */
 package view;
 
+import Model.User;
 import javax.swing.JFrame;
 
 /**
@@ -12,11 +13,17 @@ import javax.swing.JFrame;
  */
 public class FrHome extends javax.swing.JFrame {
 
+    private User ActiveUser;
+    
     /**
      * Creates new form FrHome
      */
     public FrHome() {
         initComponents();
+    }
+    
+    public void loginUser(User user){
+        this.ActiveUser = user;
     }
 
     /**
@@ -71,9 +78,11 @@ public class FrHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // Abre a página de login.
-        FrLogin loginPage = new FrLogin();
+        FrLogin loginPage = new FrLogin(this);
         
         loginPage.setLocationRelativeTo(this);
         loginPage.setVisible(true);

@@ -20,9 +20,9 @@ public class ValidarLogin {
     
     private static final String CAMINHO_CSV = "usuarios.csv";
     
-     public ValidarLogin(String login, String senha) {
-        this.login = login;
-        this.senha = senha;
+     public ValidarLogin() {
+        this.login = null;
+        this.senha = null;
     }
 
     

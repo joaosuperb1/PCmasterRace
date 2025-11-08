@@ -1,6 +1,7 @@
 view\FrTécnico.class
 controller\UserController.class
 controller\AtendimentoController.class
+view\FrcadAtendimento$3.class
 Model\Atendimento.class
 Model\ValidarLogin.class
 view\FrGerente$5.class
@@ -20,10 +21,12 @@ view\TMcadEstoque.class
 view\FrAtendimentos$1.class
 view\FrEstoque$2.class
 Model\Dispositivos.class
+view\FrcadAtendimento$4.class
 view\TMcadAtendimento.class
 view\FrGerente$3.class
 view\FrAtendimentos.class
 Model\Cliente.class
+view\FrcadAtendimento$1.class
 view\FrCliente$1.class
 Model\Tecnico.class
 view\FrTécnico$2.class
@@ -32,10 +35,13 @@ view\FrLogin$2.class
 controller\LoginController.class
 view\FrAtendimentos$2.class
 view\FrEstoque$3.class
+view\FrcadAtendimento$4$1.class
 view\FrCliente.class
 view\FrTécnico$3.class
 view\FrEstoque.class
+view\FrcadAtendimento.class
 view\FrCliente$2.class
+view\FrcadAtendimento$2.class
 controller\EstoqueController.class
 view\FrGerente$4.class
 view\FrVisualizarFuncionario.class

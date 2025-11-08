@@ -4,17 +4,28 @@
  */
 package view;
 
+import Model.User;
+import controller.LoginController;
+
 /**
  *
  * @author gabri
  */
 public class FrLogin extends javax.swing.JFrame {
 
+    LoginController controller = new LoginController();
+    
+    private FrHome parent;
     /**
      * Creates new form FrLoginF
      */
     public FrLogin() {
         initComponents();
+    }
+    
+    public FrLogin(FrHome parent){
+        initComponents();
+        this.parent = parent;
     }
 
     /**
@@ -133,16 +144,16 @@ public class FrLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        //LoginController controller = new LoginController( edtUser.getText(), edtPassword.getText());
-
-        //if(controller.valueValidator()){
-
-            //}
-        FrHome painelHome = new FrHome();
-        FrGerente painelGerente = new FrGerente();
-        this.setVisible(false);
-        painelGerente.setLocationRelativeTo(this);
-        painelGerente.setVisible(true);
+        controller.setLogin(edtUser.getText());
+        controller.setSenha(edtPassword.getText());
+        
+        
+        this.parent.loginUser(controller.validarLogin(controller.getLogin(), controller.getSenha()));
+        //FrHome painelHome = new FrHome();
+        //FrGerente painelGerente = new FrGerente();
+        //this.setVisible(false);
+        //painelGerente.setLocationRelativeTo(this);
+        //painelGerente.setVisible(true);
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

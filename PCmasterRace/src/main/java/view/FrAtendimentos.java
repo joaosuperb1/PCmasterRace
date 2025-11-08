@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
 
@@ -12,23 +12,20 @@ import java.util.List;
  *
  * @author gabri
  */
-public class FrAtendimentos extends javax.swing.JDialog {
+public class FrAtendimentos extends javax.swing.JFrame {
     
     private AtendimentoController gerenciadorAtendimento;
     private TMcadAtendimento tableModel;
     /**
-     * Creates new form FrAtendimentosD
+     * Creates new form FrAtendimentosF
      */
-    public FrAtendimentos(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public FrAtendimentos() {
         initComponents();
         // 1. Cria UMA instância do Gerenciador
         this.gerenciadorAtendimento = new AtendimentoController();
         
         // 2. Carrega os dados na tabela PELA PRIMEIRA VEZ
         atualizarTabela();
-
-
     }
 
     /**
@@ -40,16 +37,13 @@ public class FrAtendimentos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
         btnNovo = new javax.swing.JButton();
-        btnLista = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         gridCadAtendimento = new javax.swing.JTable();
+        lblTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setText("Painel - Atendimentos");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovo.setText("Novo");
@@ -59,11 +53,11 @@ public class FrAtendimentos extends javax.swing.JDialog {
             }
         });
 
-        btnLista.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLista.setText("Listar");
-        btnLista.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListaActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -80,6 +74,9 @@ public class FrAtendimentos extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(gridCadAtendimento);
 
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitle.setText("Painel - Atendimentos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +89,7 @@ public class FrAtendimentos extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -107,7 +104,7 @@ public class FrAtendimentos extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -120,14 +117,14 @@ public class FrAtendimentos extends javax.swing.JDialog {
         // Visível somente para nível técnico e gerente.
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
-        // Abre listagem de atendimentos.
-        // Nível de acesso cliente só mostra atendimentos do usuário.
-    }//GEN-LAST:event_btnListaActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
-    
-    
-public void atualizarTabela() {
+    /**
+     * @param args the command line arguments
+     */
+    public void atualizarTabela() {
         // 1. Busca a lista de dados no gerenciador
         List<Atendimento> lista = this.gerenciadorAtendimento.listarTodos();
         
@@ -138,51 +135,10 @@ public void atualizarTabela() {
         // (use o nome exato da sua JTable, ex: gridCadAtendimento)
         gridCadAtendimento.setModel(tmcadAtendimento);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrAtendimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrAtendimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrAtendimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrAtendimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrAtendimentos dialog = new FrAtendimentos(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLista;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JTable gridCadAtendimento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;

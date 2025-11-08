@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author gabri
@@ -71,16 +73,19 @@ public class FrHome extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // Abre a página de login.
-        FrLogin loginPage = new FrLogin(this, true);
+        FrLogin loginPage = new FrLogin();
         
         loginPage.setLocationRelativeTo(this);
         loginPage.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
+       System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    public void pageHandler (JFrame parent, JFrame child){
+        
+    }
     /**
      * @param args the command line arguments
      */

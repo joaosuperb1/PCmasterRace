@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
 
@@ -8,13 +8,12 @@ package view;
  *
  * @author gabri
  */
-public class FrGerente extends javax.swing.JDialog {
+public class FrGerente extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrGerenteD
+     * Creates new form FrGerenteF
      */
-    public FrGerente(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public FrGerente() {
         initComponents();
     }
 
@@ -34,7 +33,7 @@ public class FrGerente extends javax.swing.JDialog {
         btnEstoque = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAtendimentos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAtendimentos.setText("Atendimentos");
@@ -121,11 +120,11 @@ public class FrGerente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentosActionPerformed
-        
-        FrAtendimentos atendimentos = new FrAtendimentos(null, true);
-        atendimentos.setLocationRelativeTo(null);
+
+        FrAtendimentos atendimentos = new FrAtendimentos();
+        atendimentos.setLocationRelativeTo(this);
         atendimentos.setVisible(true);
-    
+
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
@@ -145,11 +144,9 @@ public class FrGerente extends javax.swing.JDialog {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // Retorna à página de login
-        
-        
-        
+
         this.dispose();
-        
+
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**

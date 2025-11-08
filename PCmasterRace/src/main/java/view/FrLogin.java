@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
 
@@ -8,13 +8,12 @@ package view;
  *
  * @author gabri
  */
-public class FrLogin extends javax.swing.JDialog {
+public class FrLogin extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrLoginD
+     * Creates new form FrLoginF
      */
-    public FrLogin(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public FrLogin() {
         initComponents();
     }
 
@@ -36,7 +35,7 @@ public class FrLogin extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         MessageBar = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitle.setBackground(new java.awt.Color(102, 102, 102));
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -139,21 +138,18 @@ public class FrLogin extends javax.swing.JDialog {
         //if(controller.valueValidator()){
 
             //}
-        FrHome painelHome = new FrHome();    
-        FrGerente painelGerente = new FrGerente(painelHome, true);
-        this.changePanelVisibility(false);
+        FrHome painelHome = new FrHome();
+        FrGerente painelGerente = new FrGerente();
+        this.setVisible(false);
         painelGerente.setLocationRelativeTo(this);
         painelGerente.setVisible(true);
-        
-        
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    public void changePanelVisibility(boolean flag){
-        this.setVisible(flag);
-    }
     /**
      * @param args the command line arguments
      */
+   
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,6 +8,11 @@ package Model;
  *
  * @author superbi
  */
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "idUser")
 public class Gerente extends User {
     
     @Override

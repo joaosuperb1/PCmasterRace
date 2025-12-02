@@ -6,21 +6,20 @@ package Model;
 
 import java.awt.List;
 import java.util.Objects;
+import jakarta.persistence.*;
 
 /**
  *
  * @author superbi
  */
 
-//@Entity
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED) // Cria uma tabela para User e tabelas separadas para os filhos
 public abstract class User {
     
-    /*
-    Acabei de ver na aula do seu zé 
-    
-    @Id // chave primária 
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gerar ID
-    */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
     protected String nome;
     protected int idade;

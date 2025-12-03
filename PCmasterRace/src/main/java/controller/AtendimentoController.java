@@ -132,4 +132,23 @@ public class AtendimentoController {
             }
         }
     }
+    
+    public List<Atendimento> listarPorCliente(int idCliente) {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Atendimento> lista = null;
+        try {
+            // JPQL: Filtra onde o objeto 'cliente' dentro de 'Atendimento' tem o ID igual ao parâmetro
+            TypedQuery<Atendimento> query = em.createQuery(
+                "SELECT a FROM Atendimento a WHERE a.cliente.id = :id", 
+                Atendimento.class
+            );
+            query.setParameter("id", idCliente);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar atendimentos do cliente: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        return lista;
+    }
 }

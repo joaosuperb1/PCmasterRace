@@ -4,15 +4,24 @@
  */
 package view;
 
+import Model.User;
+
 /**
  *
  * @author gabri
  */
 public class FrCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrClienteF
-     */
+    private User usuarioLogado; // Guarda os dados do cliente
+    
+    
+    public FrCliente(User usuario) {
+        this.usuarioLogado = usuario;
+        initComponents();
+        // Pode colocar o nome dele no título se quiser:
+        // lblTitle.setText("Painel - " + usuario.getNome());
+    }
+    
     public FrCliente() {
         initComponents();
     }
@@ -87,7 +96,12 @@ public class FrCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentosActionPerformed
-        // Abre o painel de atendimentos com nível de acesso cliente.
+
+        FrAtendimentos tela = new FrAtendimentos(this.usuarioLogado);
+        
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

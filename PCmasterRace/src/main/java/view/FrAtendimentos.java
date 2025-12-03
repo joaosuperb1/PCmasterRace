@@ -5,6 +5,7 @@
 package view;
 
 import Model.Atendimento;
+import Model.User;
 import controller.AtendimentoController;
 import java.util.List;
 
@@ -16,18 +17,39 @@ public class FrAtendimentos extends javax.swing.JFrame {
     
     private AtendimentoController gerenciadorAtendimento;
     private TMcadAtendimento tableModel;
+    private User usuarioLogado;
     /**
      * Creates new form FrAtendimentosF
      */
     public FrAtendimentos() {
         initComponents();
-        // 1. Cria UMA instância do Gerenciador
         this.gerenciadorAtendimento = new AtendimentoController();
-        
-        // 2. Carrega os dados na tabela PELA PRIMEIRA VEZ
+        this.usuarioLogado = null; // Modo genérico (admin)
         atualizarTabela();
     }
-
+    
+    public FrAtendimentos(User usuario) {
+        initComponents();
+        this.gerenciadorAtendimento = new AtendimentoController();
+        this.usuarioLogado = usuario; // Recebe quem logou
+        
+        configurarPermissoes(); // Ajusta a tela
+        atualizarTabela();      // Carrega os dados corretos
+    }
+    
+    
+    private void configurarPermissoes() {
+        if (this.usuarioLogado != null && this.usuarioLogado.getNivelAcesso() == 3) {
+            // Se for Cliente (Nível 3):
+            btnNovo.setVisible(false); // Esconde o botão Novo
+            lblTitle.setText("Meus Atendimentos"); // (Opcional) Muda o título
+        } else {
+            // Se for Admin/Técnico:
+            btnNovo.setVisible(true);
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,17 +151,21 @@ public class FrAtendimentos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void atualizarTabela() {
-        // 1. Busca a lista de dados no gerenciador
-        List<Atendimento> lista = this.gerenciadorAtendimento.listarTodos();
+        List<Atendimento> lista;
         
-        // 2. Cria o objeto AbstractTableModel
-        TMcadAtendimento tmcadAtendimento = new TMcadAtendimento(lista);
+        // Decide qual lista carregar
+        if (this.usuarioLogado != null && this.usuarioLogado.getNivelAcesso() == 3) {
+            // Busca filtrada
+            lista = this.gerenciadorAtendimento.listarPorCliente(this.usuarioLogado.getId());
+        } else {
+            // Busca tudo
+            lista = this.gerenciadorAtendimento.listarTodos();
+        }
         
-        // 3. Ligar ele no modelo da sua JTable
-        // (use o nome exato da sua JTable, ex: gridCadAtendimento)
+        // O resto continua igual...
+        view.TMcadAtendimento tmcadAtendimento = new view.TMcadAtendimento(lista);
         gridCadAtendimento.setModel(tmcadAtendimento);
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnVoltar;

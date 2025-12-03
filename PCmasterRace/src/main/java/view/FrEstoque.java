@@ -9,6 +9,7 @@ import Model.Pecas;
 import controller.EstoqueController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,17 +18,15 @@ import java.util.List;
 public class FrEstoque extends javax.swing.JFrame {
     
     private EstoqueController gerenciadorEstoque;
-    private TMcadEstoque tableModel;
+    private JFrame parent; 
 
-    /**
-     * Creates new form FrEstoque
-     */
-    public FrEstoque() {
+    public FrEstoque(JFrame parent) {
+        this.parent = parent;
         initComponents();
-        // 1. Cria UMA instância do Gerenciador
-        this.gerenciadorEstoque = new EstoqueController();
         
-        // 2. Carrega os dados na tabela PELA PRIMEIRA VEZ
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        this.gerenciadorEstoque = new EstoqueController();
         atualizarTabelaCombinada();
     }
 
@@ -43,9 +42,10 @@ public class FrEstoque extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnCadastro = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         gridEstoque = new javax.swing.JTable();
+        btnCadastro1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,11 +68,11 @@ public class FrEstoque extends javax.swing.JFrame {
             }
         });
 
-        btnCadastro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCadastro.setText("Cadastro");
-        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -89,6 +89,14 @@ public class FrEstoque extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(gridEstoque);
 
+        btnCadastro1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCadastro1.setText("Cadastro");
+        btnCadastro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastro1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,9 +106,12 @@ public class FrEstoque extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -116,13 +127,15 @@ public class FrEstoque extends javax.swing.JFrame {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,9 +150,16 @@ public class FrEstoque extends javax.swing.JFrame {
         // Abre o painel de encomendas, para se adicionar itens no estoque
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // Abre o painel de cadastro, para adicionar modelos de peças e dispositivos no estoque
-    }//GEN-LAST:event_btnCadastroActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        if (this.parent != null) {
+            this.parent.setVisible(true);
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastro1ActionPerformed
 
     
 public void atualizarTabelaCombinada() {
@@ -190,9 +210,10 @@ public void atualizarTabelaCombinada() {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnCadastro1;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JTable gridEstoque;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;

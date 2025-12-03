@@ -4,6 +4,7 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/Gerente.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/Pecas.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/TMcadCliente.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/TMcadTecnico.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/Tecnico.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/User.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/Model/ValidarLogin.java
@@ -14,6 +15,7 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/EstoqueController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/JPAUtil.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/LoginController.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/TecnicoDAO.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/UserController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/UsuarioDAO.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/utils/PopularBD.java
@@ -21,6 +23,7 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrCliente.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrClientes.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrEstoque.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrFuncionarios.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrGerente.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrHome.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrLogin.java

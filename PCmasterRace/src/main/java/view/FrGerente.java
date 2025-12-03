@@ -128,7 +128,10 @@ public class FrGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
-        // Abre o painel de funcionários.
+        FrFuncionarios funcionario = new FrFuncionarios(this);
+        funcionario.setLocationRelativeTo(null);
+        funcionario.setVisible(true);
+        this.setVisible(false); 
     }//GEN-LAST:event_btnFuncionariosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -142,10 +145,12 @@ public class FrGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
-        // Abre o painel de estoque com nível de acesso gerente?
-        FrEstoque estoque = new FrEstoque();
+
+        FrEstoque estoque = new FrEstoque(this);
         estoque.setLocationRelativeTo(null);
         estoque.setVisible(true);
+        this.setVisible(false); 
+        
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

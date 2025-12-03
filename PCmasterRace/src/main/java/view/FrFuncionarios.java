@@ -5,34 +5,32 @@
 package view;
 
 import Model.Atendimento;
-import Model.Cliente;
-import Model.TMcadCliente;
-import controller.ClienteDAO;
-import controller.UsuarioDAO;
+import Model.Tecnico;
+import Model.TMcadTecnico;
+import controller.TecnicoDAO;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author superbi
  */
-public class FrClientes extends javax.swing.JFrame {
+public class FrFuncionarios extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrClientes.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrFuncionarios.class.getName());
 
-    /**
-     * Creates new form FrClientes
-     */
-    
-   private JFrame parent;
-    private ClienteDAO clienteDAO;
-   
-   public FrClientes(JFrame parent) {
+    private javax.swing.JFrame parent;
+    private controller.TecnicoDAO tecnicoDAO; 
+
+    public FrFuncionarios(JFrame parent) {
         this.parent = parent; 
-        this.clienteDAO = new ClienteDAO();
+        
+        // Instanciação
+        this.tecnicoDAO = new TecnicoDAO(); 
         
         initComponents();
-        atualizarTabela(); // Carrega os dados ao abrir
+        atualizarTabela(); 
     }
 
     /**
@@ -45,14 +43,14 @@ public class FrClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        gridClientes = new javax.swing.JTable();
+        gridTecnicos = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        gridClientes.setModel(new javax.swing.table.DefaultTableModel(
+        gridTecnicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -63,10 +61,10 @@ public class FrClientes extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(gridClientes);
+        jScrollPane1.setViewportView(gridTecnicos);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setText("Painel - Clientes");
+        lblTitle.setText("Painel - Funcionários");
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -151,19 +149,15 @@ public class FrClientes extends javax.swing.JFrame {
     }
     
     public void atualizarTabela() {
-        // 1. Busca a lista do banco
-        List<Cliente> lista = clienteDAO.listarTodos();
-        
-        // 2. Cria o modelo (TMcadCliente já existe no seu projeto)
-        TMcadCliente model = new TMcadCliente(lista);
-        
-        // 3. Define o modelo na tabela (assumindo que o nome da variável é gridClientes)
-        gridClientes.setModel(model);
+        List<Tecnico> lista = this.tecnicoDAO.listarTodos();
+        TMcadTecnico model = new TMcadTecnico(lista);
+        gridTecnicos.setModel(model);
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JTable gridClientes;
+    private javax.swing.JTable gridTecnicos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

@@ -1,8 +1,12 @@
 utils/PopularBD.class
 controller/JPAUtil.class
+view/FrFuncionarios.class
 view/FrcadAtendimento$6$1.class
+Model/TMcadTecnico.class
 view/FrClientes.class
+controller/TecnicoDAO.class
 view/FrcadAtendimento$5.class
+view/FrEstoque$4.class
 view/FrcadAtendimento$6.class
 controller/UsuarioDAO.class
 controller/ClienteDAO.class

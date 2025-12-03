@@ -6,6 +6,7 @@ package controller;
 import Model.Atendimento;
 import Model.Cliente;
 import Model.Tecnico;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -38,7 +39,7 @@ import view.TMcadAtendimento;
         // 2. Crie os Atendimentos falsos
         Atendimento a1 = new Atendimento();
         a1.setId(proximoId++); // ID: 1
-        a1.setData_atendimento("25/10/2025");
+        a1.setDataAtendimento("25/10/2025");
         a1.setCliente(cliente1);
         a1.setTecnico(tecnico1);
         a1.setStatus("Concluído");
@@ -47,7 +48,7 @@ import view.TMcadAtendimento;
 
         Atendimento a2 = new Atendimento();
         a2.setId(proximoId++); // ID: 2
-        a2.setData_atendimento("28/10/2025");
+        a2.setDataAtendimento("28/10/2025");
         a2.setCliente(cliente2);
         a2.setTecnico(tecnico2);
         a2.setStatus("Em andamento");
@@ -56,7 +57,7 @@ import view.TMcadAtendimento;
         
         Atendimento a3 = new Atendimento();
         a3.setId(proximoId++); // ID: 3
-        a3.setData_atendimento("29/10/2025");
+        a3.setDataAtendimento("29/10/2025");
         a3.setCliente(cliente1); // Cliente Ana novamente
         a3.setTecnico(tecnico1);
         a3.setStatus("Aberto");
@@ -118,6 +119,7 @@ public class AtendimentoController {
 
     /**
      * Salva ou Atualiza um atendimento na lista.
+     * @param atendimento
      */
     public void salvarAtendimento(Atendimento atendimento) {
         try {
@@ -140,13 +142,14 @@ public class AtendimentoController {
                 }
             }
             // *** A LINHA 'atualizarTabela()' FOI REMOVIDA DAQUI ***
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
      * Exclui um atendimento da lista.
+     * @param atendimento
      */
     public void excluirAtendimento(Atendimento atendimento) {
         if (atendimento == null) { /* ... (validação) ... */ return; }

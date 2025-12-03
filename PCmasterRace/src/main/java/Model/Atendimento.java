@@ -4,16 +4,37 @@
  */
 package Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 /**
  *
  * @author superbi
  */
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Atendimento {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+    
     protected String data_atendimento;
+    
+    
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
     protected Tecnico tecnico;
     private String status;
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     private String preco;
     private String descricao;

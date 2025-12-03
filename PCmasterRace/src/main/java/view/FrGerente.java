@@ -132,7 +132,13 @@ public class FrGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFuncionariosActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // Abre o painel de clientes com nível de acesso gerente.
+        FrClientes telaClientes = new FrClientes(this);
+        
+        telaClientes.setLocationRelativeTo(null); // Centraliza
+        telaClientes.setVisible(true);
+        
+        // Esconde a tela do gerente para não ficar duas janelas abertas
+        this.setVisible(false);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed

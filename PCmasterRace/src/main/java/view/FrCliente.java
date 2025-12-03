@@ -29,12 +29,11 @@ public class FrCliente extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnAtendimentos = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        btnClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setText("Painel - Clientes");
+        lblTitle.setText("Painel - Cliente");
 
         btnAtendimentos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAtendimentos.setText("Atendimentos");
@@ -52,14 +51,6 @@ public class FrCliente extends javax.swing.JFrame {
             }
         });
 
-        btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnClientes.setText("Cliente");
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,7 +59,7 @@ public class FrCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -78,9 +69,6 @@ public class FrCliente extends javax.swing.JFrame {
                                 .addGap(17, 17, 17))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnAtendimentos)
-                                .addGap(265, 265, 265))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnClientes)
                                 .addGap(265, 265, 265))))))
         );
         layout.setVerticalGroup(
@@ -90,9 +78,7 @@ public class FrCliente extends javax.swing.JFrame {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAtendimentos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addGap(19, 19, 19))
         );
@@ -108,10 +94,6 @@ public class FrCliente extends javax.swing.JFrame {
         // Retorna à página de login
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        //        conrollerCliente.save(sfsdafasfjljlkjdlkawj)s        // Abre o painel de clientes com nível de acesso cliente
-    }//GEN-LAST:event_btnClientesActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -119,7 +101,6 @@ public class FrCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtendimentos;
-    private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

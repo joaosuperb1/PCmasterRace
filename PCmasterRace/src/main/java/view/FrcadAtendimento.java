@@ -4,6 +4,12 @@
  */
 package view;
 
+import Model.Cliente;
+import Model.Tecnico;
+import Model.User;
+import controller.UsuarioDAO;
+import java.util.List;
+
 /**
  *
  * @author gabri
@@ -16,6 +22,7 @@ public class FrcadAtendimento extends javax.swing.JDialog {
     public FrcadAtendimento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        popularCombos();
     }
 
     /**
@@ -88,9 +95,19 @@ public class FrcadAtendimento extends javax.swing.JDialog {
 
         btnFinish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFinish.setText("Finalizar");
+        btnFinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinishActionPerformed(evt);
+            }
+        });
 
         btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         lblValor.setText("Valor:");
 
@@ -181,6 +198,14 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFinishActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,6 +247,29 @@ public class FrcadAtendimento extends javax.swing.JDialog {
             }
         });
     }
+    
+    
+    private void popularCombos() {
+    UsuarioDAO dao = new UsuarioDAO();
+    
+    // Limpa os itens padrão (Item 1, Item 2...)
+    SelBoxCliente.removeAllItems();
+    SelBoxTecnico.removeAllItems();
+
+    // Busca Clientes
+    List<User> clientes = dao.listarPorTipo(Cliente.class);
+    for (User u : clientes) {
+        // Adiciona o objeto. Certifique-se que User tem um toString() retornando o nome
+        // Ou adicione u.getNome() se a caixa for apenas de String
+        SelBoxCliente.addItem(u.getNome()); 
+    }
+
+    // Busca Técnicos
+    List<User> tecnicos = dao.listarPorTipo(Tecnico.class);
+    for (User u : tecnicos) {
+        SelBoxTecnico.addItem(u.getNome());
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SelBoxCliente;

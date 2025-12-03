@@ -19,18 +19,14 @@ public class PCmasterRace {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PCMasterRacePU");
-        EntityManager entityManager = factory.createEntityManager();
-
-        
-        FrHome home = new FrHome();
-        home.setVisible(true);
-        
-        
-        entityManager.close();
-        factory.close();
-        
-        
+        // Apenas inicie a tela visual
+        // O banco será chamado sob demanda pelos botões da tela
+        try {
+            FrHome home = new FrHome();
+            home.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

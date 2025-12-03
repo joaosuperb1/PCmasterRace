@@ -21,6 +21,10 @@ public class Gerente extends User {
         return 1;
     }
     
+    public int setNivelAcesso() {
+        return 1;
+    }
+    
     
 
     

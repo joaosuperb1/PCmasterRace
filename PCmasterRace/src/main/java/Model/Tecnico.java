@@ -18,4 +18,7 @@ public class Tecnico extends User{
     public int getNivelAcesso() {
         return 2;
     }
+    public int setNivelAcesso() {
+        return 2;
+    }
 }

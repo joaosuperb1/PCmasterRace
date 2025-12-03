@@ -19,7 +19,10 @@ public class Cliente extends User {
     public int getNivelAcesso() {
         return 3; // Nível mais básico
     }
-
+    
+    public int setNivelAcesso() {
+        return 3;
+    }
     
     
 }

@@ -16,64 +16,33 @@ import Model.exceptions.ValidationException;
 
 
 public class LoginController {
-    private ValidarLogin validator = new ValidarLogin();
-    private String login;
-    private String senha;
-    
-    public LoginController(){
-        this.login = null;
-        this.senha = null;
-    }
-    
-    public LoginController(String login, String senha){
-        this.login = login;
-        this.senha = senha;
-    }
-    
-    public boolean valueValidator(String login, String senha){
-        
-        try {
-            validator.ValidarLogin();
-            return true;
-            
-        } catch (ValidationException e) {
-            System.out.println("Erro de validação: " + e.getMessage());
-            return false;
-        }
-        
-    }
-    
-    public User validarLogin( String login, String senha) {
-        if(this.valueValidator(login, senha)){
-         return null;   
-        } else {
-            return null;
-        }
-    }
-    
-    
-    public void setLogin(String login){
-        this.login = login;
-    }
-    
-    public String getLogin(){
-        return this.login;
-    }
-    
-    
-    public void setSenha(String senha){
-        this.senha = senha;
-    }
-    
-    public String getSenha(){
-        return this.senha;
-    }
-    
-    
-    
-    
 
-    
-    
- 
+    private final ValidarLogin validador;
+    private final UsuarioDAO usuarioDAO;
+
+    public LoginController() {
+        this.validador = new ValidarLogin();
+        this.usuarioDAO = new UsuarioDAO();
+    }
+
+    /**
+     * Tenta realizar o login.
+     * * @param login O login digitado
+     * @param senha A senha digitada
+     * @return O objeto Usuario se der certo, ou null se login/senha estiverem errados no banco.
+     * @throws ValidationException Se o formato do texto estiver errado (ex: senha vazia).
+     */
+    public User autenticar(String login, String senha) throws ValidationException {
+        
+        // 1. Validação de Regras de Negócio (Formato)
+        // Se houver erro (ex: campo vazio), o ValidarLogin vai lançar a exceção
+        // e nós deixamos ela "subir" para a tela tratar.
+        validador.validarFormato(login, senha);
+
+        // 2. Busca no Banco de Dados
+        // Se chegou aqui, o texto é válido. Agora conferimos se existe no banco.
+        User usuarioEncontrado = usuarioDAO.autenticar(login, senha);
+        
+        return usuarioEncontrado;
+    }
 }

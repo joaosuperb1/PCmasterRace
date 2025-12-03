@@ -5,7 +5,9 @@
 package view;
 
 import Model.User;
+import Model.exceptions.ValidationException;
 import controller.LoginController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -143,17 +145,44 @@ public class FrLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        // Valida se os valores inseridos são válidos e chama o método de validação na camada controller
-        controller.setLogin(edtUser.getText());
-        controller.setSenha(edtPassword.getText());
-        
-        
-        this.parent.loginUser(controller.validarLogin(controller.getLogin(), controller.getSenha()));
-        //FrHome painelHome = new FrHome();
-        //FrGerente painelGerente = new FrGerente();
-        //this.setVisible(false);
-        //painelGerente.setLocationRelativeTo(this);
-        //painelGerente.setVisible(true);
+        // 1. Pegar os dados direto dos campos da tela
+        String loginDigitado = edtUser.getText();
+
+        // DICA DE SEGURANÇA: Para JPasswordField, use getPassword() e converta para String
+        String senhaDigitada = new String(edtPassword.getText());
+
+        try {
+            // 2. Chama o controller. O método autenticar agora retorna um objeto Usuario (ou null)
+            // E pode lançar (throw) uma ValidationException se os campos estiverem vazios.
+            User usuarioLogado = (User) controller.autenticar(loginDigitado, senhaDigitada);
+
+            if (usuarioLogado != null) {
+                // --- CENÁRIO DE SUCESSO (Encontrou no Banco) ---
+
+                // Se você usa aquele método do pai para gerenciar a sessão:
+                // this.parent.loginUser(usuarioLogado);
+                // OU, se for abrir as janelas diretamente aqui:
+                direcionarUsuario(usuarioLogado);
+
+                // Fecha a tela de login
+                this.dispose();
+
+            } else {
+                // --- CENÁRIO DE FALHA (Banco não achou ninguém com esse login/senha) ---
+                JOptionPane.showMessageDialog(this,
+                        "Usuário ou senha incorretos!",
+                        "Acesso Negado",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (ValidationException e) {
+            // --- CENÁRIO DE ERRO DE DIGITAÇÃO (ValidarLogin lançou erro) ---
+            // A mensagem (e.getMessage()) será "Senha não pode ser nula", "Login muito curto", etc.
+            JOptionPane.showMessageDialog(this,
+                    e.getMessage(),
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -173,4 +202,8 @@ public class FrLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
+
+    private void direcionarUsuario(User usuarioLogado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

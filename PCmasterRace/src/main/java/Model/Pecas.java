@@ -4,12 +4,24 @@
  */
 package Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+
 /**
  *
  * @author superbi
  */
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pecas {
     // Atributos
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
     private String brand;
     private String model;

@@ -1,1 +1,4 @@
+utils/PopularBD.class
+controller/JPAUtil.class
 controller/UsuarioDAO.class
+controller/ClienteDAO.class

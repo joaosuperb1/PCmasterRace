@@ -154,8 +154,10 @@ public class FrGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // Retorna à página de login
-
+        
+        FrLogin telaLogin = new FrLogin(); 
+        telaLogin.setLocationRelativeTo(null);
+        telaLogin.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnVoltarActionPerformed

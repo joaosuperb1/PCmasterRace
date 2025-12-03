@@ -110,15 +110,26 @@ public class FrTécnico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentosActionPerformed
-        // Abre o painel de atendimentos com nível de acesso técnico
+       FrAtendimentos atendimentos = new FrAtendimentos(this);
+        atendimentos.setLocationRelativeTo(this);
+        atendimentos.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
     private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
-        // Abre o painel de estoque com nível de acesso técnico?
+        FrEstoque estoque = new FrEstoque(this);
+        estoque.setLocationRelativeTo(null);
+        estoque.setVisible(true);
+        this.setVisible(false); 
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // Abre o painel de clientes com nível de acesso técnico
+        FrClientes telaClientes = new FrClientes(this);
+        telaClientes.setLocationRelativeTo(null); // Centraliza
+        telaClientes.setVisible(true);
+        
+        // Esconde a tela do gerente para não ficar duas janelas abertas
+        this.setVisible(false);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

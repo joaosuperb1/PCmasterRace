@@ -8,6 +8,7 @@ import Model.Atendimento;
 import Model.User;
 import controller.AtendimentoController;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,13 +16,16 @@ import java.util.List;
  */
 public class FrAtendimentos extends javax.swing.JFrame {
     
+    private JFrame parent;
     private AtendimentoController gerenciadorAtendimento;
     private TMcadAtendimento tableModel;
     private User usuarioLogado;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrAtendimentos.class.getName());
     /**
      * Creates new form FrAtendimentosF
      */
-    public FrAtendimentos() {
+    public FrAtendimentos(JFrame parent) {
+        this.parent = parent;
         initComponents();
         this.gerenciadorAtendimento = new AtendimentoController();
         this.usuarioLogado = null; // Modo genérico (admin)
@@ -144,6 +148,9 @@ public class FrAtendimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        if (this.parent != null) {
+            this.parent.setVisible(true);
+        }
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 

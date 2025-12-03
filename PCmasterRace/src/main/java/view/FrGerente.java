@@ -121,9 +121,10 @@ public class FrGerente extends javax.swing.JFrame {
 
     private void btnAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentosActionPerformed
 
-        FrAtendimentos atendimentos = new FrAtendimentos();
+        FrAtendimentos atendimentos = new FrAtendimentos(this);
         atendimentos.setLocationRelativeTo(this);
         atendimentos.setVisible(true);
+        this.setVisible(false);
 
     }//GEN-LAST:event_btnAtendimentosActionPerformed
 
@@ -136,7 +137,6 @@ public class FrGerente extends javax.swing.JFrame {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         FrClientes telaClientes = new FrClientes(this);
-        
         telaClientes.setLocationRelativeTo(null); // Centraliza
         telaClientes.setVisible(true);
         

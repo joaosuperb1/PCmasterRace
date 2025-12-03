@@ -24,4 +24,9 @@ public class Tecnico extends User{
     public int getNivelAcesso() {
         return 2;
     }
+    
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

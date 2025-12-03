@@ -91,7 +91,7 @@ public class UsuarioDAO {
     EntityManager em = emf.createEntityManager();
     try {
         // JPQL para buscar apenas os Clientes
-        return em.createQuery("SELECT c FROM Tecnico t", Tecnico.class).getResultList();
+        return em.createQuery("SELECT t FROM Tecnico t", Tecnico.class).getResultList();
         } finally {
             em.close();
         }

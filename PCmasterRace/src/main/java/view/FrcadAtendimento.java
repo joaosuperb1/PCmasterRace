@@ -71,6 +71,11 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         lblCliente.setText("Cliente:");
 
         SelBoxCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SelBoxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelBoxClienteActionPerformed(evt);
+            }
+        });
 
         listServices.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -199,12 +204,53 @@ public class FrcadAtendimento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
-        this.dispose();
+        try {
+            // 1. Cria o objeto Atendimento
+            Model.Atendimento atendimento = new Model.Atendimento();
+            
+            // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
+            atendimento.setCliente((Cliente) SelBoxCliente.getSelectedItem());
+            atendimento.setTecnico((Tecnico) SelBoxTecnico.getSelectedItem());
+            atendimento.setStatus((String) SelBoxStatus.getSelectedItem());
+            
+            // 3. Pega os dados dos campos de texto
+            // Nota: jTextField2 é o campo de valor/preço na sua tela
+            atendimento.setPreco(jTextField2.getText()); 
+            
+            // Define a data atual automaticamente
+            atendimento.setData_atendimento(java.time.LocalDate.now().toString());
+            
+            // Descrição: Como não tem um campo de texto específico, 
+            // vamos pegar o item selecionado na lista de serviços ou um texto padrão
+            String servicoSelecionado = listServices.getSelectedValue();
+            if (servicoSelecionado != null) {
+                atendimento.setDescricao(servicoSelecionado);
+            } else {
+                atendimento.setDescricao("Manutenção Geral (Não especificado)");
+            }
+
+            // 4. Chama o Controller para salvar
+            controller.AtendimentoController controller = new controller.AtendimentoController();
+            controller.salvarAtendimento(atendimento);
+            
+            // 5. Fecha a janela após salvar
+            this.dispose();
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Erro ao salvar: " + e.getMessage(), 
+                "Erro", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnFinishActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void SelBoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelBoxClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelBoxClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,34 +293,38 @@ public class FrcadAtendimento extends javax.swing.JDialog {
             }
         });
     }
-    
-    
+
     private void popularCombos() {
-    UsuarioDAO dao = new UsuarioDAO();
-    
-    // Limpa os itens padrão (Item 1, Item 2...)
-    SelBoxCliente.removeAllItems();
-    SelBoxTecnico.removeAllItems();
+        UsuarioDAO dao = new UsuarioDAO();
 
-    // Busca Clientes
-    List<User> clientes = dao.listarPorTipo(Cliente.class);
-    for (User u : clientes) {
-        // Adiciona o objeto. Certifique-se que User tem um toString() retornando o nome
-        // Ou adicione u.getNome() se a caixa for apenas de String
-        SelBoxCliente.addItem(u.getNome()); 
-    }
+        // 1. Configura a caixa de Clientes
+        SelBoxCliente.removeAllItems();
+        List<Cliente> clientes = dao.listarClientes(); // Use o método específico que criamos
+        for (Cliente c : clientes) {
+            // Agora adicionamos o OBJETO inteiro (graças ao passo 1, aparecerá só o nome)
+            SelBoxCliente.addItem(c);
+        }
 
-    // Busca Técnicos
-    List<User> tecnicos = dao.listarPorTipo(Tecnico.class);
-    for (User u : tecnicos) {
-        SelBoxTecnico.addItem(u.getNome());
+        // 2. Configura a caixa de Técnicos
+        SelBoxTecnico.removeAllItems();
+        List<Tecnico> tecnicos = dao.listarTecnicos();
+        for (Tecnico t : tecnicos) {
+            SelBoxTecnico.addItem(t);
+        }
+
+        // 3. Configura a caixa de Status (Hardcoded por enquanto)
+        SelBoxStatus.removeAllItems();
+        SelBoxStatus.addItem("Aberto");
+        SelBoxStatus.addItem("Em Andamento");
+        SelBoxStatus.addItem("Aguardando Peças");
+        SelBoxStatus.addItem("Concluído");
+        SelBoxStatus.addItem("Cancelado");
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> SelBoxCliente;
+    private javax.swing.JComboBox<Object> SelBoxCliente;
     private javax.swing.JComboBox<String> SelBoxStatus;
-    private javax.swing.JComboBox<String> SelBoxTecnico;
+    private javax.swing.JComboBox<Object> SelBoxTecnico;
     private javax.swing.JButton btnAdd;
     private javax.swing.JToggleButton btnCancel;
     private javax.swing.JToggleButton btnFinish;

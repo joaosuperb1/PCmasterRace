@@ -35,7 +35,7 @@ public class ValidarLogin {
     /**
      * Passo 1: Garante que os dados inseridos (texto) são válidos antes de ir ao banco.
      */
-    public boolean validarFormato(String login, String senha) throws ValidationException {
+    public boolean validateLogin(String login, String senha) throws ValidationException {
         // Validação do login
         if (login == null || login.trim().isEmpty()) {
             throw new ValidationException("Login não pode ser nulo ou vazio.");

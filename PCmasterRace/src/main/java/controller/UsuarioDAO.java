@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.NoResultException;
+import java.util.List;
 
 /**
  *
@@ -61,4 +62,15 @@ public class UsuarioDAO {
     public void fechar() {
         emf.close();
     }
+    
+    public List<User> listarPorTipo(Class type) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        // Busca polimórfica: Traz apenas o tipo específico
+        String jpql = "SELECT u FROM " + type.getSimpleName() + " u";
+        return em.createQuery(jpql, User.class).getResultList();
+    } finally {
+        em.close();
+    }
+}
 }

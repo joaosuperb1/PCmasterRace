@@ -14,11 +14,14 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 @Entity
 @PrimaryKeyJoinColumn(name = "idUser")
 public class Tecnico extends User{
+    
+    public Tecnico() {
+        super();
+        this.nivelAcesso = 2; // Define o atributo que o JPA vai ler
+    }
+
     @Override
     public int getNivelAcesso() {
-        return 2;
-    }
-    public int setNivelAcesso() {
         return 2;
     }
 }

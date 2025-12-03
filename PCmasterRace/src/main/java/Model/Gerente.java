@@ -15,13 +15,13 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "idUser")
 public class Gerente extends User {
     
-    @Override
-    
-    public int getNivelAcesso() {
-        return 1;
+    public Gerente() {
+        super();
+        this.nivelAcesso = 1; // Define o atributo que o JPA vai ler
     }
-    
-    public int setNivelAcesso() {
+
+    @Override
+    public int getNivelAcesso() {
         return 1;
     }
     

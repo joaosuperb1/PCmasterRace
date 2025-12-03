@@ -26,6 +26,7 @@ public abstract class User {
     private String cpf;
     private String login;
     private String senha;
+    protected int nivelAcesso;
 
     
     public User() {
@@ -35,6 +36,7 @@ public abstract class User {
         this.cpf = "000.000.000-00"; 
         this.login = "";
         this.senha = "";
+        this.nivelAcesso = 0;
     }
     
     public User(int id, String nome, int idade, String cpf, String login, String senha) {

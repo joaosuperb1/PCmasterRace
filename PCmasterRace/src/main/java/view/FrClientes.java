@@ -122,8 +122,9 @@ public class FrClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // Abre o formulário de cadastro de atendimento.
-        // Visível somente para nível técnico e gerente.
+        FrcadCliente cadCliente = new FrcadCliente();
+        cadCliente.setLocationRelativeTo(this);
+        cadCliente.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     /**

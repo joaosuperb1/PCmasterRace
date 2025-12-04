@@ -114,7 +114,9 @@ public class FrAtendimentos extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // Abre o formulário de cadastro de atendimento.
-        // Visível somente para nível técnico e gerente.
+        FrcadAtendimento cadAtendimentos = new FrcadAtendimento(this, true);
+        cadAtendimentos.setLocationRelativeTo(this);
+        cadAtendimentos.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

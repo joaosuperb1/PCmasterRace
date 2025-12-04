@@ -17,14 +17,27 @@ import Model.exceptions.ValidationException;
 
 public class LoginController {
 
-    private final ValidarLogin validador;
+    private final ValidarLogin validator;
     private final UsuarioDAO usuarioDAO;
 
     public LoginController() {
-        this.validador = new ValidarLogin();
+        this.validator = new ValidarLogin();
         this.usuarioDAO = new UsuarioDAO();
     }
 
+    public boolean valueValidator(String login, String senha){
+        
+        try {
+            validator.validateLogin(login, senha);
+            return true;
+            
+        } catch (ValidationException e) {
+            System.out.println("Erro de validação: " + e.getMessage());
+            return false;
+        }
+        
+    }
+    
     /**
      * Tenta realizar o login.
      * * @param login O login digitado
@@ -37,7 +50,7 @@ public class LoginController {
         // 1. Validação de Regras de Negócio (Formato)
         // Se houver erro (ex: campo vazio), o ValidarLogin vai lançar a exceção
         // e nós deixamos ela "subir" para a tela tratar.
-        validador.validarFormato(login, senha);
+        
 
         // 2. Busca no Banco de Dados
         // Se chegou aqui, o texto é válido. Agora conferimos se existe no banco.

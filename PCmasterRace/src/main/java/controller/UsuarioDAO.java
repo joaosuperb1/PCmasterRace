@@ -4,6 +4,8 @@
  */
 package controller;
 
+import Model.Cliente;
+import Model.Tecnico;
 import Model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -69,8 +71,34 @@ public class UsuarioDAO {
         // Busca polimórfica: Traz apenas o tipo específico
         String jpql = "SELECT u FROM " + type.getSimpleName() + " u";
         return em.createQuery(jpql, User.class).getResultList();
-    } finally {
+        } finally {
         em.close();
+        }
     }
+    
+    public List<Cliente> listarClientes() {
+    EntityManager em = emf.createEntityManager();
+    try {
+        // JPQL para buscar apenas os Clientes
+        return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+   
+    
+    public List<Tecnico> listarTecnicos() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            // JPQL para buscar apenas os Clientes
+            return em.createQuery("SELECT t FROM Tecnico t", Tecnico.class).getResultList();
+            } finally {
+            em.close();
+            }
+    }
+    
+    
+
 }
-}
+
+    

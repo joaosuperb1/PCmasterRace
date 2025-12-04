@@ -6,6 +6,7 @@ package view;
 
 import Model.User;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -86,19 +87,36 @@ public class FrHome extends javax.swing.JFrame {
         
         loginPage.setLocationRelativeTo(this);
         loginPage.setVisible(true);
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    public void pageHandler (JFrame parent, JFrame child){
-        
+    public void openMainPanel(){
+        switch (this.ActiveUser.getNivelAcesso()) {
+        case 1: // Gerente
+            FrGerente frGerente = new FrGerente();
+            frGerente.setVisible(true);
+            break;
+        case 2: // Técnico
+            FrTécnico frTecnico = new FrTécnico(); // Cuidado com o acento no nome da classe se houver
+            frTecnico.setVisible(true);
+            break;
+        case 3: // Cliente
+            FrCliente frCliente = new FrCliente();
+            frCliente.setVisible(true);
+            break;
+        default:
+            JOptionPane.showMessageDialog(this, "Nível de acesso desconhecido!");
+            break;
+
     }
     /**
      * @param args the command line arguments
      */
-    
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

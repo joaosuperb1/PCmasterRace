@@ -1,4 +1,4 @@
-utils/PopularBD.class
-controller/JPAUtil.class
-controller/UsuarioDAO.class
-controller/ClienteDAO.class
+utils\PopularBD.class
+controller\UsuarioDAO.class
+controller\JPAUtil.class
+controller\ClienteDAO.class

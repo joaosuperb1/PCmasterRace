@@ -160,9 +160,10 @@ public class FrLogin extends javax.swing.JFrame {
                 // --- CENÁRIO DE SUCESSO (Encontrou no Banco) ---
 
                 // Se você usa aquele método do pai para gerenciar a sessão:
-                // this.parent.loginUser(usuarioLogado);
+                this.parent.loginUser(usuarioLogado);
+                this.parent.openMainPanel();
                 // OU, se for abrir as janelas diretamente aqui:
-                direcionarUsuario(usuarioLogado);
+                //direcionarUsuario(usuarioLogado);
 
                 // Fecha a tela de login
                 this.dispose();
@@ -203,27 +204,7 @@ public class FrLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 
-    private void direcionarUsuario(User usuarioLogado) {
-    // Verifica o nível de acesso (agora corrigido pelo passo 1)
-    switch (usuarioLogado.getNivelAcesso()) {
-        case 1: // Gerente
-            FrGerente frGerente = new FrGerente();
-            frGerente.setVisible(true);
-            break;
-        case 2: // Técnico
-            FrTécnico frTecnico = new FrTécnico(); // Cuidado com o acento no nome da classe se houver
-            frTecnico.setVisible(true);
-            break;
-        case 3: // Cliente
-            FrCliente frCliente = new FrCliente();
-            frCliente.setVisible(true);
-            break;
-        default:
-            JOptionPane.showMessageDialog(this, "Nível de acesso desconhecido!");
-            break;
-    }
-    this.dispose(); // Fecha a tela de login
-}
+    
     
     
 }

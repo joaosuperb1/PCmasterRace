@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.ClienteDAO;
 import controller.LoginController;
 
 /**
@@ -372,15 +373,6 @@ public class FrcadCliente extends javax.swing.JFrame {
         double valor;
 
         
-
-        
-        
-
-        
-
-        
-
-        
         // 6. Limpa os campos de entrada
         edtDescription.setText("");
         edtValue.setText("");
@@ -390,33 +382,7 @@ public class FrcadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
-        try {
-            // 1. Cria o objeto Atendimento
-            Model.Cliente cliente = new Model.Cliente();
-
-            // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
-            
-            cliente.setNome((String) edtNome.getText());
-            cliente.setIdade((int) SelBoxIdade.getSelectedItem());
-            cliente.setCpf((String) edtCPF.getText());
-            cliente.setLogin(edtLogin.getText());
-            cliente.setSenha(edtPassword.getText());
-            
-            
-            
-            
-
-            
-
-            
-            this.dispose();
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Erro ao salvar: " + e.getMessage(),
-                "Erro",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+        //
     }//GEN-LAST:event_btnFinishActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -428,7 +394,27 @@ public class FrcadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_edtNomeActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            // 1. Cria o objeto Atendimento
+            Model.Cliente client = new Model.Cliente();
+
+            // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
+            
+            client.setNome((String) edtNome.getText());
+            client.setIdade(40);
+            client.setCpf((String) edtCPF.getText());
+            client.setLogin(edtLogin.getText());
+            client.setSenha(edtPassword.getText());
+            ClienteDAO cli = new ClienteDAO();
+            cli.salvar(client);
+            this.dispose();
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Erro ao salvar: " + e.getMessage(),
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

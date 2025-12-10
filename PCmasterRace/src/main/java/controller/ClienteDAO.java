@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ClienteDAO {
     
     public void salvar(Cliente cliente) {
-        // 1. Pede um gerente NOVO para a fábrica estática
+        
         EntityManager em = JPAUtil.getEntityManager();
         
         try {
@@ -28,7 +28,6 @@ public class ClienteDAO {
             em.getTransaction().rollback(); // Desfaz se der erro
             throw e;
         } finally {
-            // 2. Fecha este gerente específico, mas a Fábrica continua viva lá no JPAUtil
             em.close(); 
         }
     }

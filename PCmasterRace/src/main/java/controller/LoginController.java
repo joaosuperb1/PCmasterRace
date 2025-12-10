@@ -59,7 +59,7 @@ public class LoginController {
             User usuarioEncontrado = usuarioDAO.autenticar(login, senha);
             return usuarioEncontrado;
         } else{
-            return null;
+           return null;
         }
         
         

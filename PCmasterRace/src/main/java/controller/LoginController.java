@@ -54,8 +54,14 @@ public class LoginController {
 
         // 2. Busca no Banco de Dados
         // Se chegou aqui, o texto é válido. Agora conferimos se existe no banco.
-        User usuarioEncontrado = usuarioDAO.autenticar(login, senha);
+        if(valueValidator(login, senha)){
+            
+            User usuarioEncontrado = usuarioDAO.autenticar(login, senha);
+            return usuarioEncontrado;
+        } else{
+           return null;
+        }
         
-        return usuarioEncontrado;
+        
     }
 }

@@ -13,6 +13,7 @@ controller\ClienteDAO.class
 view\FrcadAtendimento$7.class
 Model\TMcadTecnico.class
 view\FrcadCliente$8.class
+view\FrcadEstoque.class
 view\FrcadCliente.class
 view\FrcadAtendimento$8$1.class
 view\FrcadCliente$1.class
@@ -22,6 +23,8 @@ view\FrcadCliente$10.class
 view\FrcadAtendimento$8.class
 view\FrcadCliente$4.class
 view\FrFuncionarios.class
+view\FrcadEstoque$1$1.class
+view\FrcadEstoque$1.class
 view\FrcadAtendimento$5.class
 view\FrcadCliente$11.class
 view\FrcadCliente$3.class

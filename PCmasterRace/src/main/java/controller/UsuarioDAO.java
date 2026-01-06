@@ -88,6 +88,7 @@ public class UsuarioDAO {
    
     
     public List<Tecnico> listarTecnicos() {
+<<<<<<< HEAD
         EntityManager em = emf.createEntityManager();
         try {
             // JPQL para buscar apenas os Clientes
@@ -98,6 +99,16 @@ public class UsuarioDAO {
     }
     
     
+=======
+    EntityManager em = emf.createEntityManager();
+    try {
+        // JPQL para buscar apenas os Clientes
+        return em.createQuery("SELECT t FROM Tecnico t", Tecnico.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+>>>>>>> 77d91c18d0ae19ab4c00b601b51c1f3fb5238355
 
 }
 

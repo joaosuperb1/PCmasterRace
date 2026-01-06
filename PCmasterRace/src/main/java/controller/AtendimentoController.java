@@ -6,6 +6,8 @@ package controller;
 import Model.Atendimento;
 import Model.Cliente;
 import Model.Tecnico;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,150 +18,137 @@ import view.TMcadAtendimento;
  *
  * @author superbi
 
-
-           
-        //Dados Falsos Criados pelo Gemini:
-        // 1. Crie alguns Clientes e Técnicos falsos para usar nos atendimentos
-        // (Assumindo que Cliente e Tecnico têm construtores ou setters para o nome)
-        
-        Cliente cliente1 = new Cliente();
-        cliente1.setNome("Ana Beatriz Costa");
-        cliente1.setCpf("111.222.333-44");
-
-        Cliente cliente2 = new Cliente();
-        cliente2.setNome("Carlos Eduardo Lima");
-        cliente2.setCpf("555.666.777-88");
-
-        Tecnico tecnico1 = new Tecnico();
-        tecnico1.setNome("Marcos Paulo Silva");
-
-        Tecnico tecnico2 = new Tecnico();
-        tecnico2.setNome("Juliana Ferreira");
-
-        // 2. Crie os Atendimentos falsos
-        Atendimento a1 = new Atendimento();
-        a1.setId(proximoId++); // ID: 1
-        a1.setDataAtendimento("25/10/2025");
-        a1.setCliente(cliente1);
-        a1.setTecnico(tecnico1);
-        a1.setStatus("Concluído");
-        a1.setDescricao("Formatação de notebook Dell e instalação do Windows 11.");
-        a1.setPreco("R$ 150,00");
-
-        Atendimento a2 = new Atendimento();
-        a2.setId(proximoId++); // ID: 2
-        a2.setDataAtendimento("28/10/2025");
-        a2.setCliente(cliente2);
-        a2.setTecnico(tecnico2);
-        a2.setStatus("Em andamento");
-        a2.setDescricao("Troca de tela de celular (iPhone 12). Peça encomendada.");
-        a2.setPreco("R$ 750,00");
-        
-        Atendimento a3 = new Atendimento();
-        a3.setId(proximoId++); // ID: 3
-        a3.setDataAtendimento("29/10/2025");
-        a3.setCliente(cliente1); // Cliente Ana novamente
-        a3.setTecnico(tecnico1);
-        a3.setStatus("Aberto");
-        a3.setDescricao("Backup de arquivos e limpeza de vírus em PC desktop.");
-        a3.setPreco("R$ 100,00");
-
-        // 3. Adicione os atendimentos ao "banco de dados falso"
-        bancoDeDadosFalso.add(a1);
-        bancoDeDadosFalso.add(a2);
-        bancoDeDadosFalso.add(a3);
-        
-        System.out.println("HARD-CODED: Bloco estático executado, " + bancoDeDadosFalso.size() + " atendimentos de teste carregados.");
-    }
-    // --- FIM DO BLOCO ESTÁTICO ----
  */
     
-
-
 public class AtendimentoController {
 
-    // --- Nosso Banco de Dados Falso "Hard-Coded" ---
-    private static final List<Atendimento> bancoDeDadosFalso = new ArrayList<>();
-    private static int proximoId = 1;
-
-    // --- Bloco de inicialização estático (com os dados falsos) ---
-    static {
-        // (Clientes e Técnicos falsos)
-        Cliente cliente1 = new Cliente(); cliente1.setNome("Ana Beatriz Costa");
-        Cliente cliente2 = new Cliente(); cliente2.setNome("Carlos Eduardo Lima");
-        Tecnico tecnico1 = new Tecnico(); tecnico1.setNome("Marcos Paulo Silva");
-        Tecnico tecnico2 = new Tecnico(); tecnico2.setNome("Juliana Ferreira");
-
-        // (Atendimentos falsos)
-        Atendimento a1 = new Atendimento(); a1.setId(proximoId++); a1.setData_atendimento("25/10/2025"); a1.setCliente(cliente1); a1.setTecnico(tecnico1); a1.setStatus("Concluído"); a1.setDescricao("Formatação de notebook Dell."); a1.setPreco("R$ 150,00");
-        Atendimento a2 = new Atendimento(); a2.setId(proximoId++); a2.setData_atendimento("28/10/2025"); a2.setCliente(cliente2); a2.setTecnico(tecnico2); a2.setStatus("Em andamento"); a2.setDescricao("Troca de tela iPhone 12."); a2.setPreco("R$ 750,00");
-        Atendimento a3 = new Atendimento(); a3.setId(proximoId++); a3.setData_atendimento("29/10/2025"); a3.setCliente(cliente1); a3.setTecnico(tecnico1); a3.setStatus("Aberto"); a3.setDescricao("Backup de arquivos e limpeza."); a3.setPreco("R$ 100,00");
-
-        bancoDeDadosFalso.add(a1);
-        bancoDeDadosFalso.add(a2);
-        bancoDeDadosFalso.add(a3);
-    }
-    // --- Fim do Bloco Estático ---
-
-    /**
-     * Construtor (agora vazio).
-     */
     public AtendimentoController() {
-        // Não precisa mais do TableModel aqui!
+        // Construtor vazio
     }
 
     /**
-     * NOVO MÉTODO (ou renomeado): Apenas retorna a lista.
-     * @return Uma cópia da lista de atendimentos.
+     * Busca todos os atendimentos no Banco de Dados.
+     * @return Lista de atendimentos do banco.
      */
     public List<Atendimento> listarTodos() {
-        System.out.println("GERENCIADOR: Listando todos... " + bancoDeDadosFalso.size() + " encontrados.");
-        return new ArrayList<>(bancoDeDadosFalso); // Retorna uma cópia
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Atendimento> lista = null;
+        
+        try {
+            // JPQL: Seleciona todos os objetos Atendimento
+            // O JOIN FETCH pode ser necessário se você quiser carregar Cliente e Tecnico junto para evitar LazyInitializationException na tabela,
+            // mas para começar, o SELECT simples funciona se as relações forem EAGER ou se a sessão estiver aberta (no caso aqui fechamos rápido, então cuidado).
+            // Se der erro na tela ao exibir o nome do cliente, mude para: "SELECT a FROM Atendimento a JOIN FETCH a.cliente JOIN FETCH a.tecnico"
+            TypedQuery<Atendimento> query = em.createQuery("SELECT a FROM Atendimento a", Atendimento.class);
+            lista = query.getResultList();
+            System.out.println("GERENCIADOR (BD): " + lista.size() + " atendimentos encontrados.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar atendimentos: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        
+        return lista;
     }
 
     /**
-     * Salva ou Atualiza um atendimento na lista.
-     * @param atendimento
+     * Salva (INSERT) ou Atualiza (UPDATE) um atendimento no banco.
+     * @param atendimento Objeto preenchido na tela.
      */
     public void salvarAtendimento(Atendimento atendimento) {
+        // Validação básica
+        if (atendimento.getCliente() == null || atendimento.getTecnico() == null) {
+            JOptionPane.showMessageDialog(null, "Cliente e Técnico são obrigatórios.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        EntityManager em = JPAUtil.getEntityManager();
+        
         try {
-            if (atendimento.getCliente() == null || atendimento.getTecnico() == null) {
-                JOptionPane.showMessageDialog(null, "Cliente e Técnico são obrigatórios.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
+            em.getTransaction().begin();
+
             if (atendimento.getId() == 0) {
-                atendimento.setId(proximoId++); 
-                bancoDeDadosFalso.add(atendimento);
+                // --- INSERT ---
+                // O ID será gerado automaticamente pelo banco
+                em.persist(atendimento);
                 JOptionPane.showMessageDialog(null, "Atendimento salvo com sucesso!");
             } else {
-                for (int i = 0; i < bancoDeDadosFalso.size(); i++) {
-                    if (bancoDeDadosFalso.get(i).getId() == atendimento.getId()) {
-                        bancoDeDadosFalso.set(i, atendimento);
-                        JOptionPane.showMessageDialog(null, "Atendimento atualizado com sucesso!");
-                        return; // Sai do método
-                    }
-                }
+                // --- UPDATE ---
+                // O merge atualiza os dados do registro existente baseando-se no ID
+                em.merge(atendimento);
+                JOptionPane.showMessageDialog(null, "Atendimento atualizado com sucesso!");
             }
-            // *** A LINHA 'atualizarTabela()' FOI REMOVIDA DAQUI ***
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+
+            em.getTransaction().commit();
+            
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no banco: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } finally {
+            em.close();
         }
     }
 
     /**
-     * Exclui um atendimento da lista.
-     * @param atendimento
+     * Exclui um atendimento do banco.
+     * @param atendimento Objeto selecionado na tabela (deve ter ID).
      */
     public void excluirAtendimento(Atendimento atendimento) {
-        if (atendimento == null) { /* ... (validação) ... */ return; }
-        
-        int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (atendimento == null) return;
+
+        int confirm = JOptionPane.showConfirmDialog(null, 
+                "Tem certeza que deseja excluir este atendimento?", 
+                "Confirmar Exclusão", 
+                JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            bancoDeDadosFalso.removeIf(at -> at.getId() == atendimento.getId());
-            JOptionPane.showMessageDialog(null, "Atendimento excluído com sucesso!");
-            // *** A LINHA 'atualizarTabela()' FOI REMOVIDA DAQUI ***
+            EntityManager em = JPAUtil.getEntityManager();
+            try {
+                em.getTransaction().begin();
+                
+                // Primeiro, buscamos o objeto "gerenciado" pelo ID para garantir que o Hibernate sabe quem remover
+                Atendimento atendimentoParaRemover = em.find(Atendimento.class, atendimento.getId());
+                
+                if (atendimentoParaRemover != null) {
+                    em.remove(atendimentoParaRemover);
+                    JOptionPane.showMessageDialog(null, "Atendimento excluído com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Atendimento não encontrado no banco (talvez já excluído).");
+                }
+                
+                em.getTransaction().commit();
+                
+            } catch (Exception e) {
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+                JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e.getMessage());
+            } finally {
+                em.close();
+            }
         }
+    }
+    
+    public List<Atendimento> listarPorCliente(int idCliente) {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Atendimento> lista = null;
+        try {
+            // JPQL: Filtra onde o objeto 'cliente' dentro de 'Atendimento' tem o ID igual ao parâmetro
+            TypedQuery<Atendimento> query = em.createQuery(
+                "SELECT a FROM Atendimento a WHERE a.cliente.id = :id", 
+                Atendimento.class
+            );
+            query.setParameter("id", idCliente);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar atendimentos do cliente: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        return lista;
     }
 }

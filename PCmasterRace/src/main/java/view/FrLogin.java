@@ -42,11 +42,11 @@ public class FrLogin extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         edtUser = new javax.swing.JTextField();
-        edtPassword = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MessageBar = new javax.swing.JTextArea();
+        edtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,12 +60,6 @@ public class FrLogin extends javax.swing.JFrame {
         edtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edtUserActionPerformed(evt);
-            }
-        });
-
-        edtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtPasswordActionPerformed(evt);
             }
         });
 
@@ -94,17 +88,20 @@ public class FrLogin extends javax.swing.JFrame {
                         .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblUser)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(edtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblPassword)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(edtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 20, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(edtPassword)))))
                         .addGap(0, 59, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -138,10 +135,6 @@ public class FrLogin extends javax.swing.JFrame {
     private void edtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edtUserActionPerformed
-
-    private void edtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
@@ -196,7 +189,7 @@ public class FrLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea MessageBar;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JTextField edtPassword;
+    private javax.swing.JPasswordField edtPassword;
     private javax.swing.JTextField edtUser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPassword;
@@ -204,7 +197,34 @@ public class FrLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 
+<<<<<<< HEAD
     
+=======
+    private void direcionarUsuario(User usuarioLogado) {
+        switch (usuarioLogado.getNivelAcesso()) {
+            case 1: // Gerente
+                FrGerente frGerente = new FrGerente(); // Idealmente passe o user aqui também
+                frGerente.setVisible(true);
+                break;
+            case 2: // Técnico
+                FrTécnico frTecnico = new FrTécnico(); // Idealmente passe o user aqui também
+                frTecnico.setVisible(true);
+                break;
+            case 3: // Cliente
+                // AQUI ESTÁ A MÁGICA: Passamos o objeto logado para a tela
+                FrCliente frCliente = new FrCliente(usuarioLogado);
+                frCliente.setVisible(true);
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Nível de acesso desconhecido!");
+                break;
+        }
+        this.dispose();
+    }
     
-    
+
+
 }
+>>>>>>> 77d91c18d0ae19ab4c00b601b51c1f3fb5238355
+    
+   

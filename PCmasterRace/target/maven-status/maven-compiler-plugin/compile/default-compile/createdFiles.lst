@@ -1,4 +1,19 @@
+<<<<<<< HEAD
+=======
+view\FrEstoque$4.class
+view\FrcadAtendimento$6.class
+view\FrClientes.class
+view\FrcadAtendimento$7$1.class
+>>>>>>> 77d91c18d0ae19ab4c00b601b51c1f3fb5238355
 utils\PopularBD.class
 controller\UsuarioDAO.class
 controller\JPAUtil.class
 controller\ClienteDAO.class
+<<<<<<< HEAD
+=======
+view\FrcadAtendimento$7.class
+Model\TMcadTecnico.class
+controller\TecnicoDAO.class
+view\FrFuncionarios.class
+view\FrcadAtendimento$5.class
+>>>>>>> 77d91c18d0ae19ab4c00b601b51c1f3fb5238355

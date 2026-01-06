@@ -6,7 +6,9 @@ package controller;
 
 import Model.Cliente;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,5 +31,20 @@ public class ClienteDAO {
             // 2. Fecha este gerente específico, mas a Fábrica continua viva lá no JPAUtil
             em.close(); 
         }
+    }
+    
+    public List<Cliente> listarTodos() {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Cliente> clientes = null;
+        try {
+            // JPQL: Busca todos os objetos da classe Cliente
+            TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c", Cliente.class);
+            clientes = query.getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar clientes: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        return clientes;
     }
 }

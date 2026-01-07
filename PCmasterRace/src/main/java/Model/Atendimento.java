@@ -11,7 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,6 +42,43 @@ public class Atendimento {
     private Cliente cliente;
     private String preco;
     private String descricao;
+    
+    @ManyToMany
+    @JoinTable(name = "atendimento_pecas",
+            joinColumns = @JoinColumn(name = "atendimento_id"),
+            inverseJoinColumns = @JoinColumn(name = "pecas_id"))
+    private List<Pecas> pecasUtilizadas = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "atendimento_dispositivos",
+            joinColumns = @JoinColumn(name = "atendimento_id"),
+            inverseJoinColumns = @JoinColumn(name = "dispositivo_id"))
+    private List<Dispositivos> dispositivosEnvolvidos = new ArrayList<>();
+
+    // Getters e Setters para as listas
+    public List<Pecas> getPecasUtilizadas() {
+        return pecasUtilizadas;
+    }
+
+    public void setPecasUtilizadas(List<Pecas> pecasUtilizadas) {
+        this.pecasUtilizadas = pecasUtilizadas;
+    }
+
+    public void addPeca(Pecas peca) {
+        this.pecasUtilizadas.add(peca);
+    }
+
+    public List<Dispositivos> getDispositivosEnvolvidos() {
+        return dispositivosEnvolvidos;
+    }
+
+    public void setDispositivosEnvolvidos(List<Dispositivos> dispositivosEnvolvidos) {
+        this.dispositivosEnvolvidos = dispositivosEnvolvidos;
+    }
+    
+    public void addDispositivo(Dispositivos dispositivo) {
+        this.dispositivosEnvolvidos.add(dispositivo);
+    }
 
     public int getId() {
         return id;

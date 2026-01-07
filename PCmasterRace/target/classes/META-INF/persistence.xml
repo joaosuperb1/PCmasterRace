@@ -14,6 +14,7 @@
         <class>Model.Pecas</class>
         <class>Model.Dispositivos</class>
         <class>Model.Atendimento</class>
+        <class>Model.Feedback</class>
         
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

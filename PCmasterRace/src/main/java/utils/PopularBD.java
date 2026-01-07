@@ -265,7 +265,7 @@ public class PopularBD {
             disp10.setPreco(0.0);
             em.persist(disp10);
 
-            System.out.println("--- 4. Criando Atendimentos ---");
+            System.out.println("--- 4. Criando Atendimentos (Com Peças/Dispositivos) ---");
 
             // Atendimento 1
             Atendimento atend1 = new Atendimento();
@@ -275,6 +275,8 @@ public class PopularBD {
             atend1.setStatus("CONCLUÍDO");
             atend1.setDescricao("Troca de tela e formatação do sistema.");
             atend1.setPreco("350.00");
+            // Adicionando Dispositivo relacionado
+            atend1.addDispositivo(disp1); // Dell Inspiron
             em.persist(atend1);
 
             // Atendimento 2
@@ -285,6 +287,7 @@ public class PopularBD {
             atend2.setStatus("EM ANDAMENTO");
             atend2.setDescricao("Substituição da bateria e limpeza interna.");
             atend2.setPreco("280.00");
+            atend2.addDispositivo(disp4); // iPhone 13
             em.persist(atend2);
 
             // Atendimento 3
@@ -295,6 +298,8 @@ public class PopularBD {
             atend3.setStatus("ABERTO");
             atend3.setDescricao("Upgrade de memória RAM para 16GB.");
             atend3.setPreco("220.00");
+            atend3.addDispositivo(disp3); // Lenovo
+            atend3.addPeca(peca4); // Memória Corsair
             em.persist(atend3);
 
             // Atendimento 4
@@ -305,6 +310,7 @@ public class PopularBD {
             atend4.setStatus("ABERTO");
             atend4.setDescricao("Diagnóstico de superaquecimento.");
             atend4.setPreco("80.00");
+            atend4.addDispositivo(disp7); // HP Pavilion
             em.persist(atend4);
 
             // Atendimento 5
@@ -315,6 +321,7 @@ public class PopularBD {
             atend5.setStatus("CANCELADO");
             atend5.setDescricao("Recuperação de dados de HD danificado.");
             atend5.setPreco("500.00");
+            atend5.addPeca(peca3); // HD Usado (apenas exemplo)
             em.persist(atend5);
 
             // Atendimento 6
@@ -325,6 +332,8 @@ public class PopularBD {
             atend6.setStatus("AGUARDANDO PEÇAS");
             atend6.setDescricao("Troca da placa-mãe e fonte.");
             atend6.setPreco("650.00");
+            atend6.addPeca(peca8); // ASUS
+            atend6.addPeca(peca6); // Fonte Corsair
             em.persist(atend6);
 
             // Atendimento 7
@@ -335,6 +344,7 @@ public class PopularBD {
             atend7.setStatus("CONCLUÍDO");
             atend7.setDescricao("Instalação de SSD e reinstalação do Windows.");
             atend7.setPreco("300.00");
+            atend7.addPeca(peca2); // Samsung SSD
             em.persist(atend7);
 
             // Atendimento 8
@@ -345,6 +355,7 @@ public class PopularBD {
             atend8.setStatus("CONCLUÍDO");
             atend8.setDescricao("Reparo no conector de carga e troca do módulo Wi-Fi.");
             atend8.setPreco("420.00");
+            atend8.addDispositivo(disp6); // Xiaomi
             em.persist(atend8);
 
             // Atendimento 9
@@ -355,6 +366,7 @@ public class PopularBD {
             atend9.setStatus("EM ANDAMENTO");
             atend9.setDescricao("Troca da tela trincada.");
             atend9.setPreco("850.00");
+            atend9.addDispositivo(disp5); // Galaxy S21
             em.persist(atend9);
 
             // Atendimento 10
@@ -365,16 +377,30 @@ public class PopularBD {
             atend10.setStatus("ABERTO");
             atend10.setDescricao("Configuração de rede e instalação de softwares.");
             atend10.setPreco("150.00");
+            atend10.addDispositivo(disp10); // Tablet Samsung
             em.persist(atend10);
+            
+            System.out.println("--- 5. Criando Feedbacks ---");
+            
+            Feedback feed1 = new Feedback("Ótimo serviço, o notebook ficou novo!", atend1);
+            em.persist(feed1);
+            
+            Feedback feed2 = new Feedback("O atendimento foi rápido, mas achei o preço um pouco alto.", atend7);
+            em.persist(feed2);
+            
+            Feedback feed3 = new Feedback("Excelente profissional, resolveu o problema do wifi.", atend8);
+            em.persist(feed3);
+
 
             // Finalizando
             em.getTransaction().commit();
             System.out.println("--- Banco povoado com Sucesso! ---");
             System.out.println("Total de registros criados:");
-            System.out.println("- Pessoas: " + (3 + 5 + 2) + " (3 técnicos, 5 clientes, 2 gerentes)");
+            System.out.println("- Pessoas: " + (3 + 5 + 2));
             System.out.println("- Peças: 10");
             System.out.println("- Dispositivos: 10");
             System.out.println("- Atendimentos: 10");
+            System.out.println("- Feedbacks: 3");
 
         } catch (Exception e) {
             e.printStackTrace();

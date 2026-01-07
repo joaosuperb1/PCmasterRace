@@ -1,0 +1,11 @@
+ID, data_atendimento, tecnico, status, cliente, preco
+1, '24/10/2023', Rafael, Finalizado, Luana, '10,99'
+2, '25/10/2023', Bruno, Pendente, Mariana, '25,50'
+3, '25/10/2023', Camila, Em andamento, Pedro, '150,00'
+4, '26/10/2023', Rafael, Finalizado, Juliana, '75,90'
+5, '27/10/2023', Thiago, Finalizado, Carlos, '30,00'
+6, '28/10/2023', Fernanda, Cancelado, Beatriz, '0,00'
+7, '28/10/2023', Lucas, Pendente, Rodrigo, '55,00'
+8, '29/10/2023', Bruno, Finalizado, Gabriela, '120,75'
+9, '30/10/2023', Camila, Em andamento, Felipe, '80,20'
+10, '31/10/2023', Rafael, Finalizado, Amanda, '45,00'

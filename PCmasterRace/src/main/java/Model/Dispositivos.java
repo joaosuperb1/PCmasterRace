@@ -25,26 +25,29 @@ public class Dispositivos {
     
     private String brand;
     private String model;
-    private String condicao;
+    private String codigo;
     private double custo;
     private double preco;
+    private int quant;
 
     public Dispositivos() {
         this.id = 0;
         this.brand = "";
         this.model = "";
-        this.condicao = "";
+        this.codigo = "";
         this.custo = 0.0;
         this.preco = 0.0;
+        this.quant = 0;
     }
     
-    public Dispositivos(int id, String brand, String model, String condicao, double custo, double preco) {
+    public Dispositivos(int id, String brand, String model, String codigo, double custo, double preco, int quant) {
         this.id = id;
         this.brand = brand;
         this.model = model;
-        this.condicao = condicao;
+        this.codigo = codigo;
         this.custo = custo;
         this.preco = preco;
+        this.quant = quant;
     }
     
     public int getID() {
@@ -71,12 +74,12 @@ public class Dispositivos {
         this.model = model;
     }
 
-    public String getCondicao() {
-        return condicao;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCondicao(String condicao) {
-        this.condicao = condicao;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public double getCusto() {
@@ -95,6 +98,14 @@ public class Dispositivos {
         this.preco = preco;
     }
     
+    public void setQuant(int quant){
+        this.quant = quant;
+    }
+    
+    public int getQuant(){
+        return quant;
+    }
+    
     public double calcularLucro() {
         return preco - custo;
     }
@@ -106,15 +117,6 @@ public class Dispositivos {
         return ((preco - custo) / custo) * 100;
     }
     
-    // Método para verificar se a peça é nova
-    public boolean isNova() {
-        return "Nova".equalsIgnoreCase(condicao);
-    }
-    
-    // Método para verificar se a peça é usada
-    public boolean isUsada() {
-        return "Usada".equalsIgnoreCase(condicao);
-    }
     
     // Método para aplicar desconto no preço
     public void aplicarDesconto(double percentualDesconto) {
@@ -132,21 +134,21 @@ public class Dispositivos {
     }
     
     // Método toString para exibir informações da peça
+
     @Override
     public String toString() {
-        return "Dispositivo [ID=" + id + 
-               ", Brand=" + brand + 
-               ", Model=" + model + 
-               ", Condição=" + condicao + 
-               ", Custo=R$ " + String.format("%.2f", custo) + 
-               ", Preço=R$ " + String.format("%.2f", preco) + 
-               ", Lucro=R$ " + String.format("%.2f", calcularLucro()) + "]";
+        return "Dispositivos{" + "id=" + id + ", brand=" + brand + ", model=" + model + ", codigo=" + codigo + ", custo=" + custo + ", preco=" + preco + ", quant=" + quant + '}';
     }
+    
     
     // Método para exibir resumo da peça
     public String exibirResumo() {
         return String.format("ID: %d | %s %s | %s | Preço: R$ %.2f", 
-                            id, brand, model, condicao, preco);
+                            id, brand, model, codigo, preco);
+    }
+
+    public Object getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

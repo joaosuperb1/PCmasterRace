@@ -411,13 +411,16 @@ public class PopularBD {
             
             System.out.println("--- 5. Criando Feedbacks ---");
             
-            Feedback feed1 = new Feedback("Ótimo serviço, o notebook ficou novo!", atend1);
+            // O atend1 era do cli1
+            Feedback feed1 = new Feedback("Ótimo serviço, o notebook ficou novo!", cli1); 
             em.persist(feed1);
             
-            Feedback feed2 = new Feedback("O atendimento foi rápido, mas achei o preço um pouco alto.", atend7);
+            // O atend7 era do cli3
+            Feedback feed2 = new Feedback("O atendimento foi rápido, mas achei o preço um pouco alto.", cli3);
             em.persist(feed2);
             
-            Feedback feed3 = new Feedback("Excelente profissional, resolveu o problema do wifi.", atend8);
+            // O atend8 era do cli2
+            Feedback feed3 = new Feedback("Excelente profissional, resolveu o problema do wifi.", cli2);
             em.persist(feed3);
 
             // Finalizando

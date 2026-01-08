@@ -38,6 +38,7 @@ public class FrCliente extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnAtendimentos = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnFeedback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +61,14 @@ public class FrCliente extends javax.swing.JFrame {
             }
         });
 
+        btnFeedback.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFeedback.setText("Feedback");
+        btnFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeedbackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,7 +87,10 @@ public class FrCliente extends javax.swing.JFrame {
                                 .addGap(17, 17, 17))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnAtendimentos)
-                                .addGap(265, 265, 265))))))
+                                .addGap(265, 265, 265))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFeedback)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +99,9 @@ public class FrCliente extends javax.swing.JFrame {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAtendimentos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addGap(19, 19, 19))
         );
@@ -111,6 +125,17 @@ public class FrCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
+        frFeedbackF telaFeedback = new frFeedbackF(this.usuarioLogado);
+    
+    // Torna a tela visível
+        telaFeedback.setVisible(true);
+    
+    // Opcional: Se você quiser fechar a tela de menu do cliente ao abrir a de feedback, 
+    // descomente a linha abaixo:
+    // this.dispose();
+    }//GEN-LAST:event_btnFeedbackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -118,6 +143,7 @@ public class FrCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtendimentos;
+    private javax.swing.JButton btnFeedback;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

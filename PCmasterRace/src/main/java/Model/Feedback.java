@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 /**
@@ -25,17 +26,19 @@ public class Feedback {
 
     private String comentario;
 
-    // Relacionamento 1 para 1: Um atendimento tem um feedback
-    @OneToOne
-    @JoinColumn(name = "atendimento_id", unique = true) 
-    private Atendimento atendimento;
+    // --- MUDANÇA PRINCIPAL AQUI ---
+    // Removemos @OneToOne com Atendimento
+    // Adicionamos @ManyToOne com Cliente (Um cliente pode ter vários feedbacks)
+    @ManyToOne 
+    @JoinColumn(name = "cliente_id") 
+    private Cliente cliente;
 
     public Feedback() {
     }
 
-    public Feedback(String comentario, Atendimento atendimento) {
+    public Feedback(String comentario, Cliente cliente) {
         this.comentario = comentario;
-        this.atendimento = atendimento;
+        this.cliente = cliente;
     }
 
     public int getId() {
@@ -54,16 +57,19 @@ public class Feedback {
         this.comentario = comentario;
     }
 
-    public Atendimento getAtendimento() {
-        return atendimento;
+    // --- GETTER E SETTER DO CLIENTE ---
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
     public String toString() {
-        return "Feedback{" + "id=" + id + ", comentario=" + comentario + ", atendimento=" + atendimento.getId() + '}';
+        // Ajustei para imprimir o nome do cliente, evitando erros se o objeto for nulo
+        String nomeCliente = (cliente != null) ? cliente.getNome() : "Desconhecido";
+        return "Feedback{" + "id=" + id + ", comentario=" + comentario + ", cliente=" + nomeCliente + '}';
     }
 }

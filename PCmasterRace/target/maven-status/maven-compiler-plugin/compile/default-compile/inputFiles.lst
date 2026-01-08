@@ -14,13 +14,16 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/AtendimentoController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/ClienteDAO.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/EstoqueController.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/FeedbackController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/JPAUtil.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/LoginController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/TecnicoDAO.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/UserController.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/controller/UsuarioDAO.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/utils/PopularBD.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FeedbackTableModel.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrAtendimentos.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrCadFeedback.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrCliente.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrClientes.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/FrEstoque.java
@@ -36,3 +39,4 @@
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/TMcadAtendimento.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/TMcadEstoque.java
 /media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/TMcadUser.java
+/media/superbi/Vault/SeuZe/Aqui/PCmasterRace/PCmasterRace/src/main/java/view/frFeedbackF.java

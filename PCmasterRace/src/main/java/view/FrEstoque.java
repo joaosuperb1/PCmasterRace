@@ -160,7 +160,9 @@ public class FrEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastro1ActionPerformed
-        // TODO add your handling code here:
+        FrcadEstoque cad = new FrcadEstoque(this, true);
+        cad.setLocationRelativeTo(this);
+        cad.setVisible(true);
     }//GEN-LAST:event_btnCadastro1ActionPerformed
 
     

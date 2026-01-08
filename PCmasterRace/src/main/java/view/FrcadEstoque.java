@@ -4,6 +4,10 @@
  */
 package view;
 
+import Model.Dispositivos;
+import Model.Pecas;
+import controller.EstoqueDAO;
+
 /**
  *
  * @author gabri
@@ -16,6 +20,7 @@ public class FrcadEstoque extends javax.swing.JDialog {
     public FrcadEstoque(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        popularCombos();
     }
 
     /**
@@ -29,7 +34,7 @@ public class FrcadEstoque extends javax.swing.JDialog {
 
         lblTitle = new javax.swing.JLabel();
         lblType = new javax.swing.JLabel();
-        selBoxType = new javax.swing.JComboBox<>();
+        SelBoxType = new javax.swing.JComboBox<>();
         lblName = new javax.swing.JLabel();
         edtName = new javax.swing.JTextField();
         lblBrand = new javax.swing.JLabel();
@@ -50,7 +55,7 @@ public class FrcadEstoque extends javax.swing.JDialog {
 
         lblType.setText("Tipo:");
 
-        selBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SelBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblName.setText("Nome de Exibição:");
 
@@ -95,14 +100,14 @@ public class FrcadEstoque extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblType)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblCode)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(edtCode)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblBrand)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,18 +115,15 @@ public class FrcadEstoque extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblCost)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(edtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblPrice))
                             .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnFinish)
-                                .addGap(42, 42, 42))))))
+                            .addComponent(btnFinish)
+                            .addComponent(edtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +132,7 @@ public class FrcadEstoque extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblType)
-                    .addComponent(selBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCode)
                     .addComponent(edtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,15 +164,46 @@ public class FrcadEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
+        String tipoSelecionado = (String) SelBoxType.getSelectedItem();
+        if(tipoSelecionado.equals("Peça")){
+            Model.Pecas peca = new Pecas();
+            
+            peca.setBrand(edtBrand.getText());
+            peca.setModel(edtName.getText());
+            peca.setCondicao("NOVO");
+            peca.setCodigo(edtCode.getText());
+            peca.setCusto(Double.parseDouble(edtCost.getText().trim().replace(",", ".")));
+            peca.setPreco(Double.parseDouble(edtPrice.getText().trim().replace(",", ".")));
+            peca.setQuant(0);
+            
+            controller.EstoqueDAO estoque = new EstoqueDAO();
+            estoque.salvarPeca(peca);
+            
+        } else {
+            Model.Dispositivos dispositivo = new Dispositivos();
+            
+            dispositivo.setBrand(edtBrand.getText());
+            dispositivo.setModel(edtName.getText());
+            dispositivo.setCusto(Double.parseDouble(edtCost.getText().trim().replace(",", ".")));
+            dispositivo.setPreco(Double.parseDouble(edtPrice.getText().trim().replace(",", ".")));
+            dispositivo.setQuant(0);
+            
+            controller.EstoqueDAO estoque = new EstoqueDAO();
+            estoque.salvarDispositivo(dispositivo);
+            this.dispose();
+        }
         
     }//GEN-LAST:event_btnFinishActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    public void popularCombos(){
+        //Popular Tipo
+        SelBoxType.removeAllItems();
+        SelBoxType.addItem("Peça");
+        SelBoxType.addItem("Dispositivos");
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> SelBoxType;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnFinish;
     private javax.swing.JTextField edtBrand;
@@ -185,6 +218,5 @@ public class FrcadEstoque extends javax.swing.JDialog {
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblType;
-    private javax.swing.JComboBox<String> selBoxType;
     // End of variables declaration//GEN-END:variables
 }

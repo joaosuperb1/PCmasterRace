@@ -83,6 +83,47 @@ public class EstoqueDAO {
         
         return emf.createEntityManager();
     }
+    
+    public Pecas buscaPecas(String codigo){
+        List<Model.Pecas> lista = this.listarPecas();
+            Model.Pecas pecaEncontrada = null;
+        
+        for (Model.Pecas p : lista) {
+                if (p.getCodigo().equals(codigo)) {
+                    pecaEncontrada = p;
+                    return p;
+                    
+                } 
+            }
+        return null;
+    }
+    
+    public Dispositivos buscaDispositivos(String codigo){
+        List<Model.Dispositivos> lista = this.listarDispositivos();
+        Model.Dispositivos dispositivoEncontrado = null;
+        
+        for (Model.Dispositivos d : lista) {
+            if (d.getCodigo().equals(codigo)){
+                dispositivoEncontrado = d;
+                return d;
+            }    
+        }
+        return null;
+        
+    }
+    
+    public void alteraQuantidadePeca(Pecas peca, int alteracao){
+        EntityManager em = emf.createEntityManager();
+        int novaQuantidade = peca.getQuant() + alteracao;
+        peca.setQuant(novaQuantidade);
+        em.merge(peca);
+        
+    }
+    
+    public void alteraQuantidadeDispositivo(Dispositivos dispositivo, int alteracao){
+        int novaQuantidade = dispositivo.getQuant() + alteracao;
+        dispositivo.setQuant(novaQuantidade);
+    }
 
     
     

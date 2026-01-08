@@ -7,7 +7,9 @@ package view;
 import Model.Cliente;
 import Model.Tecnico;
 import Model.User;
+import controller.EstoqueDAO;
 import controller.UsuarioDAO;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -78,6 +80,9 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         edtValue = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         listServices = new javax.swing.JList<>();
+        lblCode = new javax.swing.JLabel();
+        edtCode = new javax.swing.JTextField();
+        SelBoxType = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -124,6 +129,11 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         lblStatus.setText("Status:");
 
         SelBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SelBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelBoxStatusActionPerformed(evt);
+            }
+        });
 
         btnFinish.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFinish.setText("Finalizar");
@@ -155,6 +165,16 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(listServices);
 
+        lblCode.setText("Código do Produto:");
+
+        edtCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtCodeActionPerformed(evt);
+            }
+        });
+
+        SelBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,38 +191,45 @@ public class FrcadAtendimento extends javax.swing.JDialog {
                         .addComponent(edtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTecnico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelBoxTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblServicos)
-                                .addGap(45, 45, 45)
-                                .addComponent(lblDescription))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(lblValue)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtDescription)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAdd))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTecnico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblServicos)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(lblDescription))
+                                    .addComponent(lblValue))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edtDescription, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(edtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnAdd))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SelBoxTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SelBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblStatus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SelBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74)
+                                .addComponent(lblCode)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -225,12 +252,16 @@ public class FrcadAtendimento extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblStatus)
                         .addComponent(SelBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCode)
+                    .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
                     .addComponent(lblValue)
                     .addComponent(edtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +272,7 @@ public class FrcadAtendimento extends javax.swing.JDialog {
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(edtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -295,14 +326,66 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         try {
             // 1. Cria o objeto Atendimento
             Model.Atendimento atendimento = new Model.Atendimento();
-            
+            EstoqueDAO dao = new EstoqueDAO();
+            EntityManager em = dao.getEntityManager(); // Certifique-se que seu DAO expõe o EntityManager ou crie um aqui
             // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
+            String tipoSelecionado = (String) SelBoxType.getSelectedItem();
+            String codigoBuscador = edtCode.getText();
+            double precoProduto = 0;
+            if (tipoSelecionado.equals("Serviço")){
+                
+            } else if(tipoSelecionado.equals("Peça")){
+                    
+                    List<Model.Pecas> lista = dao.listarPecas();
+                Model.Pecas pecaEncontrada = null;
+
+                for (Model.Pecas p : lista) {
+                    if (p.getCodigo().equals(codigoBuscador)) {
+                        pecaEncontrada = p;
+                        precoProduto = pecaEncontrada.getPreco();
+                        break;
+                        
+                    }
+                }
+
+                if (pecaEncontrada != null) {
+                    // Soma a quantidade: Valor novo + Valor atual
+                    int novaQuantidade = pecaEncontrada.getQuant() -1;
+                    pecaEncontrada.setQuant(novaQuantidade);
+                    em.merge(pecaEncontrada); // Atualiza no banco
+                    javax.swing.JOptionPane.showMessageDialog(this, "Peça atualizada! Nova quantidade: " + novaQuantidade);
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Código de Peça não encontrado.");
+                }
+            } else {
+                List<Model.Dispositivos> lista = dao.listarDispositivos();
+            Model.Dispositivos dispositivoEncontrado = null;
+
+            for (Model.Dispositivos d : lista) {
+                if (d.getCodigo().equals(codigoBuscador)) {
+                    dispositivoEncontrado = d;
+                    precoProduto = dispositivoEncontrado.getPreco();
+                    break;
+                }
+            }
+
+            if (dispositivoEncontrado != null) {
+                int novaQuantidade = dispositivoEncontrado.getQuant() -1;
+                dispositivoEncontrado.setQuant(novaQuantidade);
+                em.merge(dispositivoEncontrado); // Atualiza no banco
+                javax.swing.JOptionPane.showMessageDialog(this, "Dispositivo atualizado! Nova quantidade: " + novaQuantidade);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Código de Dispositivo não encontrado.");
+            }
+            } 
+            
             atendimento.setCliente((Cliente) SelBoxCliente.getSelectedItem());
             atendimento.setTecnico((Tecnico) SelBoxTecnico.getSelectedItem());
             atendimento.setStatus((String) SelBoxStatus.getSelectedItem());
             
             // 3. Pega os dados dos campos de texto
             // Nota: jTextField2 é o campo de valor/preço na sua tela
+            
             atendimento.setPreco(edtTotal.getText()); 
             
             // Define a data atual automaticamente
@@ -340,6 +423,14 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_SelBoxClienteActionPerformed
 
+    private void SelBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelBoxStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelBoxStatusActionPerformed
+
+    private void edtCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtCodeActionPerformed
+
     
 
     private void popularCombos() {
@@ -367,15 +458,23 @@ public class FrcadAtendimento extends javax.swing.JDialog {
         SelBoxStatus.addItem("Aguardando Peças");
         SelBoxStatus.addItem("Concluído");
         SelBoxStatus.addItem("Cancelado");
+        
+        SelBoxType.removeAllItems();
+        SelBoxType.addItem("Serviço");
+        SelBoxType.addItem("Peça");
+        SelBoxType.addItem("Dispositivo");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Object> SelBoxCliente;
     private javax.swing.JComboBox<String> SelBoxStatus;
     private javax.swing.JComboBox<Object> SelBoxTecnico;
+    private javax.swing.JComboBox<String> SelBoxType;
     private javax.swing.JButton btnAdd;
     private javax.swing.JToggleButton btnCancel;
     private javax.swing.JToggleButton btnFinish;
+    private javax.swing.JTextField edtCode;
     private javax.swing.JTextField edtDescription;
     private javax.swing.JTextField edtTotal;
     private javax.swing.JTextField edtValue;
@@ -384,6 +483,7 @@ public class FrcadAtendimento extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblServicos;
     private javax.swing.JLabel lblStatus;

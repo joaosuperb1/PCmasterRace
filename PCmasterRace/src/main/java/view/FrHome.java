@@ -94,29 +94,38 @@ public class FrHome extends javax.swing.JFrame {
        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    public void openMainPanel(){
-        switch (this.ActiveUser.getNivelAcesso()) {
+    public void openMainPanel() {
+    switch (this.ActiveUser.getNivelAcesso()) {
         case 1: // Gerente
-            FrGerente frGerente = new FrGerente();
+            // Passamos o ActiveUser para o construtor que agora exige um User
+            FrGerente frGerente = new FrGerente(this.ActiveUser); 
             frGerente.setVisible(true);
+            this.dispose(); // Fecha a Home ao abrir o painel
             break;
+            
         case 2: // Técnico
-            FrTécnico frTecnico = new FrTécnico(); // Cuidado com o acento no nome da classe se houver
+            // Passamos o ActiveUser para o construtor que agora exige um User
+            FrTécnico frTecnico = new FrTécnico(this.ActiveUser); 
             frTecnico.setVisible(true);
+            this.dispose();
             break;
+            
         case 3: // Cliente
-            FrCliente frCliente = new FrCliente();
+            // Certifique-se que FrCliente também receba o usuário no construtor
+            FrCliente frCliente = new FrCliente(this.ActiveUser);
             frCliente.setVisible(true);
+            this.dispose();
             break;
+            
         default:
             JOptionPane.showMessageDialog(this, "Nível de acesso desconhecido!");
             break;
-
     }
+}
     /**
      * @param args the command line arguments
      */
-        }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

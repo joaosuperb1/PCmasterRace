@@ -200,11 +200,11 @@ public class FrLogin extends javax.swing.JFrame {
     private void direcionarUsuario(User usuarioLogado) {
         switch (usuarioLogado.getNivelAcesso()) {
             case 1: // Gerente
-                FrGerente frGerente = new FrGerente(); // Idealmente passe o user aqui também
+                FrGerente frGerente = new FrGerente(usuarioLogado); // Idealmente passe o user aqui também
                 frGerente.setVisible(true);
                 break;
             case 2: // Técnico
-                FrTécnico frTecnico = new FrTécnico(); // Idealmente passe o user aqui também
+                FrTécnico frTecnico = new FrTécnico(usuarioLogado); // Idealmente passe o user aqui também
                 frTecnico.setVisible(true);
                 break;
             case 3: // Cliente

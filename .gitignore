@@ -3,4 +3,5 @@
 /PCmasterRace/build/
 /PCmasterRace/target/
 /target
+*.class
 

@@ -4,8 +4,15 @@
  */
 package view;
 
+import Model.Cliente;
+import Model.Gerente;
+import Model.Tecnico;
+import Model.User;
 import controller.ClienteDAO;
 import controller.LoginController;
+import controller.UserController;
+import javax.swing.JOptionPane;
+import java.awt.event.ItemEvent;
 
 /**
  *
@@ -68,6 +75,8 @@ public class FrcadCliente extends javax.swing.JFrame {
         edtPassword = new javax.swing.JPasswordField();
         btnCancelar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
+        SelBoxAcesso = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -237,7 +246,7 @@ public class FrcadCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Clientes");
+        jLabel1.setText("Cadastro de Usuario");
 
         lblNome.setText("Nome:");
 
@@ -267,6 +276,12 @@ public class FrcadCliente extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
+        edtPassConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtPassConfirmActionPerformed(evt);
+            }
+        });
+
         lblConfSenha.setText("Confirmar Senha:");
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -284,6 +299,20 @@ public class FrcadCliente extends javax.swing.JFrame {
                 btnConfirmarActionPerformed(evt);
             }
         });
+
+        SelBoxAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin 1", "Tecnico 2", "Cliente 3" }));
+        SelBoxAcesso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                SelBoxAcessoItemStateChanged(evt);
+            }
+        });
+        SelBoxAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelBoxAcessoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Tipo de usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,7 +332,9 @@ public class FrcadCliente extends javax.swing.JFrame {
                             .addComponent(edtLogin)
                             .addComponent(edtPassConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                             .addComponent(edtPassword))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(SelBoxAcesso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -314,10 +345,16 @@ public class FrcadCliente extends javax.swing.JFrame {
                                 .addComponent(lblNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelBoxIdade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SelBoxIdade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(293, 293, 293)
@@ -334,14 +371,21 @@ public class FrcadCliente extends javax.swing.JFrame {
                     .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(SelBoxIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPF)
-                    .addComponent(edtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLogin)
-                    .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCPF)
+                            .addComponent(edtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLogin)
+                            .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelBoxAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
@@ -394,28 +438,44 @@ public class FrcadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_edtNomeActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        try {
-            // 1. Cria o objeto Atendimento
-            Model.Cliente client = new Model.Cliente();
+        String tipo = SelBoxAcesso.getSelectedItem().toString();
+        try{
+        Model.User novoUsuario;
 
-            // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
-            
-            client.setNome((String) edtNome.getText());
-            int idade = Integer.valueOf((String) SelBoxIdade.getSelectedItem());
-            client.setIdade(idade);
-            client.setCpf((String) edtCPF.getText());
-            client.setLogin(edtLogin.getText());
-            client.setSenha(edtPassword.getText());
-            ClienteDAO cli = new ClienteDAO();
-            cli.salvar(client);
-            this.dispose();
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Erro ao salvar: " + e.getMessage(),
-                "Erro",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+        // 1. Instancia a classe correta conforme a seleção
+        if (tipo.contains("Admin")) {
+            Model.Gerente g = new Model.Gerente();
+            g.setCpf(edtCPF.getText());
+            novoUsuario = g;
+        } else if (tipo.contains("Técnico")) {
+            Model.Tecnico t = new Model.Tecnico();
+            novoUsuario = t;
+        } else {
+            Model.Cliente c = new Model.Cliente();
+            c.setCpf(edtCPF.getText());
+            novoUsuario = c;
         }
+
+        // 2. Preenche os dados comuns a todos (User)
+        novoUsuario.setNome(edtNome.getText());
+        novoUsuario.setLogin(edtLogin.getText());
+        novoUsuario.setSenha(new String(edtPassword.getPassword()));
+        
+        // Pega a idade do SelBoxIdade
+        if (SelBoxIdade.getSelectedItem() != null) {
+            novoUsuario.setIdade(Integer.parseInt(SelBoxIdade.getSelectedItem().toString()));
+        }
+
+        // 3. Salva usando o UserController (que aceita qualquer User e gerencia a transação)
+        controller.UsuarioDAO usuarioDAO = new controller.UsuarioDAO();
+        usuarioDAO.salvar(novoUsuario); 
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso no Banco de Dados!");
+        this.dispose();
+        
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -429,6 +489,23 @@ public class FrcadCliente extends javax.swing.JFrame {
     private void SelBoxIdadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_SelBoxIdadeItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_SelBoxIdadeItemStateChanged
+
+    private void SelBoxAcessoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_SelBoxAcessoItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        String selecionado = SelBoxAcesso.getSelectedItem().toString();
+        System.out.println("Selecionado: " + selecionado);
+    }
+    }//GEN-LAST:event_SelBoxAcessoItemStateChanged
+
+    private void SelBoxAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelBoxAcessoActionPerformed
+        // Verifica se o evento é de SELEÇÃO (evita disparar duas vezes ao desmarcar o anterior)
+        // Apenas para verificar se a seleção está funcionando
+        
+    }//GEN-LAST:event_SelBoxAcessoActionPerformed
+
+    private void edtPassConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtPassConfirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtPassConfirmActionPerformed
 
     
 
@@ -444,6 +521,7 @@ public class FrcadCliente extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> SelBoxAcesso;
     private javax.swing.JComboBox<Object> SelBoxCliente;
     private javax.swing.JComboBox<String> SelBoxIdade;
     private javax.swing.JComboBox<String> SelBoxStatus;
@@ -465,6 +543,7 @@ public class FrcadCliente extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCPF;

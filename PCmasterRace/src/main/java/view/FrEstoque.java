@@ -147,7 +147,9 @@ public class FrEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetailActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // Abre o painel de encomendas, para se adicionar itens no estoque
+        FrUpdateEstoque updater = new FrUpdateEstoque(this, true);
+        updater.setLocationRelativeTo(this);
+        updater.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

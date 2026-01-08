@@ -153,11 +153,12 @@ public class FrLogin extends javax.swing.JFrame {
                 // --- CENÁRIO DE SUCESSO (Encontrou no Banco) ---
 
                 // Se você usa aquele método do pai para gerenciar a sessão:
-                // this.parent.loginUser(usuarioLogado);
+                //this.parent.loginUser(usuarioLogado);
                 // OU, se for abrir as janelas diretamente aqui:
                 direcionarUsuario(usuarioLogado);
 
                 // Fecha a tela de login
+                
                 this.dispose();
 
             } else {

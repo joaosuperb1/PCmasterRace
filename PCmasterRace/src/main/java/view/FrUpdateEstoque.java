@@ -4,6 +4,10 @@
  */
 package view;
 
+import controller.EstoqueDAO;
+import jakarta.persistence.EntityManager;
+import java.util.List;
+
 /**
  *
  * @author gabri
@@ -15,8 +19,8 @@ public class FrUpdateEstoque extends javax.swing.JDialog {
      */
     public FrUpdateEstoque(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.popularQuantidade();
         initComponents();
+        this.popularCombos();
     }
 
     /**
@@ -30,23 +34,48 @@ public class FrUpdateEstoque extends javax.swing.JDialog {
 
         lblTitle = new javax.swing.JLabel();
         lblCode = new javax.swing.JLabel();
-        edtCode = new javax.swing.JTextField();
         lblAmount = new javax.swing.JLabel();
-        selBoxAmount = new javax.swing.JComboBox<>();
+        SelBoxAmount = new javax.swing.JComboBox<>();
+        btnFinish = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        SelBoxType = new javax.swing.JComboBox<>();
+        edtCode = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setText("Adicionar Produtos");
 
-        lblCode.setText("Código do Produto:");
+        lblCode.setText("Código:");
 
-        lblAmount.setText("jLabel1");
+        lblAmount.setText("Quantidade");
 
-        selBoxAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        selBoxAmount.addActionListener(new java.awt.event.ActionListener() {
+        SelBoxAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SelBoxAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selBoxAmountActionPerformed(evt);
+                SelBoxAmountActionPerformed(evt);
+            }
+        });
+
+        btnFinish.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnFinish.setText("Finalizar");
+        btnFinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinishActionPerformed(evt);
+            }
+        });
+
+        btnAdd.setText("Adicionar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        SelBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SelBoxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelBoxTypeActionPerformed(evt);
             }
         });
 
@@ -55,65 +84,170 @@ public class FrUpdateEstoque extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAmount)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(selBoxAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCode)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtCode)))))
+                        .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnFinish))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAmount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelBoxAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCode)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtCode)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(SelBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCode)
                     .addComponent(edtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAmount)
-                    .addComponent(selBoxAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 196, Short.MAX_VALUE))
+                    .addComponent(SelBoxAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(btnFinish)
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void selBoxAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selBoxAmountActionPerformed
+    private void SelBoxAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelBoxAmountActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_selBoxAmountActionPerformed
+    }//GEN-LAST:event_SelBoxAmountActionPerformed
 
-    private void popularQuantidade() {
-    // 1. Limpa todos os itens existentes
-    selBoxAmount.removeAllItems();
+    private void btnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinishActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFinishActionPerformed
 
-    // 2. Itera de 18 até 100
-    for (int i = 1; i <= 100; i++) {
-        // 3. Adiciona o número (convertido implicitamente para String) à JComboBox
-        selBoxAmount.addItem(String.valueOf(i)); 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String codigoBusca = edtCode.getText().trim();
+    String tipoSelecionado = (String) SelBoxType.getSelectedItem();
+    int quantidadeParaAdicionar = Integer.parseInt((String) SelBoxAmount.getSelectedItem());
+
+    if (codigoBusca.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Informe um código!");
+        return;
     }
+
+    EstoqueDAO dao = new EstoqueDAO();
+    
+    // O EntityManager será necessário para o merge (update)
+    EntityManager em = dao.getEntityManager(); // Certifique-se que seu DAO expõe o EntityManager ou crie um aqui
+    
+    try {
+        em.getTransaction().begin();
+
+        if (tipoSelecionado.equals("Peça")) {
+            List<Model.Pecas> lista = dao.listarPecas();
+            Model.Pecas pecaEncontrada = null;
+
+            for (Model.Pecas p : lista) {
+                if (p.getCodigo().equals(codigoBusca)) {
+                    pecaEncontrada = p;
+                    break;
+                }
+            }
+
+            if (pecaEncontrada != null) {
+                // Soma a quantidade: Valor novo + Valor atual
+                int novaQuantidade = pecaEncontrada.getQuant() + quantidadeParaAdicionar;
+                pecaEncontrada.setQuant(novaQuantidade);
+                em.merge(pecaEncontrada); // Atualiza no banco
+                javax.swing.JOptionPane.showMessageDialog(this, "Peça atualizada! Nova quantidade: " + novaQuantidade);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Código de Peça não encontrado.");
+            }
+
+        } else if (tipoSelecionado.equals("Dispositivos")) {
+            List<Model.Dispositivos> lista = dao.listarDispositivos();
+            Model.Dispositivos dispositivoEncontrado = null;
+
+            for (Model.Dispositivos d : lista) {
+                if (d.getCodigo().equals(codigoBusca)) {
+                    dispositivoEncontrado = d;
+                    break;
+                }
+            }
+
+            if (dispositivoEncontrado != null) {
+                int novaQuantidade = dispositivoEncontrado.getQuant() + quantidadeParaAdicionar;
+                dispositivoEncontrado.setQuant(novaQuantidade);
+                em.merge(dispositivoEncontrado); // Atualiza no banco
+                javax.swing.JOptionPane.showMessageDialog(this, "Dispositivo atualizado! Nova quantidade: " + novaQuantidade);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Código de Dispositivo não encontrado.");
+            }
+        }
+
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) em.getTransaction().rollback();
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao processar: " + e.getMessage());
+    } finally {
+        em.close();
     }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void SelBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelBoxTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelBoxTypeActionPerformed
+
+    private void popularCombos() {
+        
+        EstoqueDAO dao = new EstoqueDAO();
+        //Popular Tipo
+        SelBoxType.removeAllItems();
+        SelBoxType.addItem("Peça");
+        SelBoxType.addItem("Dispositivos");
+        //Popular Quantidade
+        // 1. Limpa todos os itens existentes
+        SelBoxAmount.removeAllItems();
+        // 2. Itera de 1 até 100
+        for (int i = 1; i <= 100; i++) {
+            // 3. Adiciona o número (convertido implicitamente para String) à JComboBox
+            SelBoxAmount.addItem(String.valueOf(i)); 
+        }
+        
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> SelBoxAmount;
+    private javax.swing.JComboBox<String> SelBoxType;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnFinish;
     private javax.swing.JTextField edtCode;
     private javax.swing.JLabel lblAmount;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JComboBox<String> selBoxAmount;
     // End of variables declaration//GEN-END:variables
+
+    void setVisible() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

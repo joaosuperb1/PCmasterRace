@@ -401,7 +401,8 @@ public class FrcadCliente extends javax.swing.JFrame {
             // 2. Pega os objetos selecionados nas ComboBoxes (Fazendo Cast)
             
             client.setNome((String) edtNome.getText());
-            client.setIdade(40);
+            int idade = Integer.valueOf((String) SelBoxIdade.getSelectedItem());
+            client.setIdade(idade);
             client.setCpf((String) edtCPF.getText());
             client.setLogin(edtLogin.getText());
             client.setSenha(edtPassword.getText());
